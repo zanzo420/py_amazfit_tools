@@ -7,8 +7,12 @@ class Config:
     @staticmethod
     def setGtrMode(gtr):
         Config._is_gtr = gtr
-        if Config._is_gtr:
+        print(gtr)
+        if Config._is_gtr == 47:
             Config._image_size = 454
+            Config._preview_size = 266
+        if Config._is_gtr == 42:
+            Config._image_size = 390
             Config._preview_size = 266
 
 

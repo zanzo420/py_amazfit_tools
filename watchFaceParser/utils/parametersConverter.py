@@ -99,11 +99,10 @@ class ParametersConverter:
                     setattr(result, propertyInfoName, ulong2long(parameter.getValue()))
                 else:
                     setattr(result, propertyInfoName, ulong2long(parameter.getValue() or None))
-
             elif propertyType == '[]':
                 assert(False) # not tested yet
-            else:
-                tmp = propertyType()
+            else:		
+                tmp = propertyType()	
                 for x in parameter.getChildren():
                     psd = ParametersConverter.parse(propertyType, [x], currentPath)
                     import json

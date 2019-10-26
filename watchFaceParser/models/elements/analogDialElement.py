@@ -43,7 +43,15 @@ class AnalogDialElement(ContainerElement):
             return self._seconds
         elif parameterId == 4:
             from watchFaceParser.models.elements.common.imageElement import ImageElement
-            self._centerImage = ImageElement(parameter = parameter, parent = self, name = 'CenterImage')
+            self._centerImage = ImageElement(parameter = parameter, parent = self, name = 'SecCenterImage') # SecCenterImage
             return self._centerImage
+        elif parameterId == 5:
+            from watchFaceParser.models.elements.common.imageElement import ImageElement
+            self._centerImage = ImageElement(parameter = parameter, parent = self, name = 'HourCenterImage') # HourCenterImage
+            return self._centerImage
+        elif parameterId == 6:
+            from watchFaceParser.models.elements.common.imageElement import ImageElement
+            self._centerImage = ImageElement(parameter = parameter, parent = self, name = 'MinCenterImage')  # MinCenterImage
+            return self._centerImage			
         else:
             return super(AnalogDialElement, self).createChildForParameter(parameter)

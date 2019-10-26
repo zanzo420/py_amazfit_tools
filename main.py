@@ -8,14 +8,15 @@ if __name__ == '__main__':
     import sys
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('--gtr', action='store_true', help='force GTR watchface')
-    parser.add_argument('filename', nargs='+', help='''watchface.bin - unpacks watchface images and config
+    #parser.add_argument('--gtr', action='store_true', help='force GTR watchface')
+    parser.add_argument('--gtr', type=int, choices=[42,47], help='force GTR watchface')
+    parser.add_argument('--file', nargs='+', help='''watchface.bin - unpacks watchface images and config
     watchface.json - packs config and referenced images to bin file''')
     args = parser.parse_args()
 
     Config.setGtrMode(args.gtr)
 
-    for inputFileName in args.filename:
+    for inputFileName in args.file:
         isDirectory = os.path.isdir(inputFileName)
         isFile = os.path.isfile(inputFileName)
         if not isDirectory and not isFile:
