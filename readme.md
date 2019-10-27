@@ -31,11 +31,11 @@ All credit goes to Валерий Миронов(https://bitbucket.org/valeronm/
         * drag & drop WATCH_FACE_FILE.bin into main/main.exe
       * to convert from extracted GTR watchface(experimental BIP support also)
         * drag & drop EXTRACTED_WATCH_FACE_FOLDER into convert/convert.exe
-* for GTR
-  * to unpack
-    * python main.py --gtr WATCH_FACE_FILE.bin
-  * to pack
-    * python main.py --gtr WATCH_FACE_FILE.json
+* for GTR (support 47 and 42 version)
+  * to unpack 47mm version
+    * python main.py --gtr 47 --file WATCH_FACE_FILE.bin
+  * to pack 47mm version
+    * python main.py --gtr 47 --file WATCH_FACE_FILE.json
   * for windows users(experimental) : USE AT YOUR OWN RISK
     * copy & unzip amazfit_gtr_tools_WIN32.7z from release/win32
       * to pack
