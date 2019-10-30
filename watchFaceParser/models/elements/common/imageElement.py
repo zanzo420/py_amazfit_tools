@@ -22,7 +22,7 @@ class ImageElement(CoordinatesElement):
         self.draw2(drawer, resources, None)
 
 
-    def draw2(self, drawer, images, angle):
+    def draw2(self, drawer, images, angle, center = None):
         x = self._x
         y = self._y
         if angle is None:
@@ -31,12 +31,15 @@ class ImageElement(CoordinatesElement):
         else:
             bitmap = images[self._imageIndex].getBitmap()
             from PIL import Image
-            # temp = Image.new('RGBA', (360, 360))
-            # temp.paste(bitmap, (180 - x, 180 - y), bitmap)
+
             temp = Image.new('RGBA', (Config.getImageSize(), Config.getImageSize()))
             temp.paste(bitmap, (Config.getImageSizeHalf() - x, Config.getImageSizeHalf() - y), bitmap)
             temp = temp.rotate(angle)
-            drawer.paste(temp, (0,0), temp)
+
+            if center is None:
+                drawer.paste(temp, (0,0), temp)
+            else:
+                drawer.paste(temp, (center.getX(),center.getY()), temp) 
 
 
     def createChildForParameter(self, parameter):
