@@ -9,6 +9,6 @@ class StepsProgress:
         4: { 'Name': 'Images4', 'Type': ImageSet}, # test
         3: { 'Name': 'Circle', 'Type': CircleScale},
         5: { 'Name': 'Unknown5', 'Type': CircleScale}, # verge
-		6: { 'Name': 'ClockHand', 'Type': ClockHand},
+	6: { 'Name': 'ClockHand', 'Type': ClockHand},
     }
 
