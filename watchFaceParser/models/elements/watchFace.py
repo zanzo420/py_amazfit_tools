@@ -8,6 +8,7 @@ class WatchFace(ContainerElement):
         self._activity = None
         self._date = None
         self._stepsProgress = None
+        self._daysProgress = None
         self._status = None
         self._battery = None
         self._analogDial = None
@@ -32,6 +33,10 @@ class WatchFace(ContainerElement):
 
     def getStepsProgress(self):
         return self._stepsProgress
+
+
+    def getDaysProgress(self):
+        return self._daysProgress		
 
 
     def getStatus(self):
@@ -80,5 +85,9 @@ class WatchFace(ContainerElement):
             from watchFaceParser.models.elements.analogDialElement import AnalogDialElement
             self._analogDial = AnalogDialElement(parameter)
             return self._analogDial
+        elif parameterId == 15:
+            from watchFaceParser.models.elements.daysProgressElement import DaysProgressElement
+            self._daysProgress = DaysProgressElement(parameter)
+            return self._daysProgress
         else:
             return super(WatchFace, self).createChildForParameter(parameter)

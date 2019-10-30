@@ -37,15 +37,19 @@ class ClockHandElement(CompositeElement):
 
         if self.getCenterImage():
             angle = 360 - int(value * 360. / total)
-            self.getCenterImage().draw2(drawer, resources, angle)
+            self.getCenterImage().draw2(drawer, resources, angle, self.getCenter())
 
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
         if parameterId == 5:
             from watchFaceParser.models.elements.common.imageElement import ImageElement
-            self._centerImage = ImageElement(parameter = parameter, parent = self, name = 'CenterImage')
+            self._centerImage = ImageElement(parameter = parameter, parent = self, name = 'Image')
             return self._centerImage
+        elif parameterId == 3:	
+            from watchFaceParser.models.elements.common.coordinatesElement import CoordinatesElement
+            self._center = CoordinatesElement(parameter = parameter, parent = self, name = 'CenterOffset')
+            return self._center
         else:
             return super(ClockHandElement, self).createChildForParameter(parameter)
 

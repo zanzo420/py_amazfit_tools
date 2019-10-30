@@ -47,6 +47,10 @@ class StepsProgressElement(ContainerElement):
             from watchFaceParser.models.elements.goalProgress.stepGaugeElement import StepGaugeElement # temp.
             self._images4 = StepGaugeElement(parameter = parameter, parent = self, name = '?_images?')
             return self._images4
+        elif parameterId == 6:
+            from watchFaceParser.models.elements.analogDial.secondsClockHandElement import SecondsClockHandElement # must must be own. fix it!!
+            self._clockHand = SecondsClockHandElement(parameter = parameter, parent = self, name = 'ClockHand')
+            return self._clockHand
         # elif parameterId == 5:
         #     from watchFaceParser.models.elements.goalProgress.circularGoalProgressElement import CircularGoalProgressElement
         #     self._circular2 = CircularGoalProgressElement(parameter = parameter, parent = self, name = 'Circular2')
