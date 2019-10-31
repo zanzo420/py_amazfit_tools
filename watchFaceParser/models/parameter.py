@@ -3,11 +3,17 @@ import io
 
 from watchFaceParser.models.parameterFlags import ParameterFlags
 
+def ulong2long(n):
+    if type(n) == int:
+        if n >= 0x7fffffffffffffff:
+            n = -(0xffffffffffffffff - n + 1)
+    return n
 
 def long2ulong(n):
     if type(n) == int:
         if n < 0:
-            return (0xffffffffffffffff + n + 1) & 0xffffffff
+            #n = (0xffffffffffffffff + n + 1) & 0xffffffff
+            n = (0xffffffffffffffff + n + 1) #fix negative integers
     return n
 
 
@@ -15,7 +21,7 @@ class Parameter:
     def __init__(self, _id, value):
         if type(value) == int:
             self._id = _id
-            self._value = value
+            self._value = ulong2long(value)
             self._children = None
         elif type(value) == list:
             self._id = _id
@@ -23,7 +29,6 @@ class Parameter:
             self._children = value
         else:
             raise Exception(f'invalid type for parameter {value}:{type(value)}')
-
 
     def getId(self):
         return self._id

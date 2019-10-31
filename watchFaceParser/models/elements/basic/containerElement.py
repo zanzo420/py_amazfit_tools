@@ -9,4 +9,4 @@ class ContainerElement(CompositeElement):
         assert(type(images) == list)
 
         for element in self.getDrawableChildren():
-            element.draw3(drawer, images, state)
+            element.draw3(drawer, images, state) 	

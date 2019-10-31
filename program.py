@@ -178,7 +178,7 @@ class Parser:
         logging.debug("Generating static preview gen done...")
         staticPreview.save(os.path.join(outputDirectory, f"{baseName}_static.png"))
 
-        # generate small preview image for Preview section.
+        #generate small preview image for Preview section.
         from PIL import Image
         new_w, new_h = Config.getPreviewSize(), Config.getPreviewSize()
         im_resized = staticPreview.resize((new_w, new_h), resample = Image.LANCZOS)

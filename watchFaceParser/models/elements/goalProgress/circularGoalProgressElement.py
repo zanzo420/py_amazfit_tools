@@ -8,4 +8,5 @@ class CircularGoalProgressElement(CircularProgressElement):
 
     def draw3(self, drawer, resources, state):
         assert(type(resources) == list)
+
         super(CircularGoalProgressElement, self).draw4(drawer, resources, state.getSteps(), state.getGoal())

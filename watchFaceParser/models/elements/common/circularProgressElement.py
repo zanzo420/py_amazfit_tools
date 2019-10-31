@@ -50,12 +50,14 @@ class CircularProgressElement(CoordinatesElement):
         if value > total:
             value = total
         sectorAngle = int(1.0 * (self.getEndAngle() - self.getStartAngle()) * value / total)
-
+        	
         from PIL import ImageDraw
         d = ImageDraw.Draw(drawer) # draw context
         radius = self.getRadiusX() + int(self.getWidth() / 2) # patch for PIL arc
+		
         rect = (int(self.getX() - radius), int(self.getY() - radius),
             int(self.getX() + radius), int(self.getY() + radius))
+
         d.arc(rect, start = -90 + self.getStartAngle(), end = -90 + self.getStartAngle() + sectorAngle, fill = self.getColor(), width = self.getWidth())
 
 

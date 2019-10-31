@@ -10,7 +10,7 @@ from watchFaceParser.models.parameter import Parameter
 def ulong2long(n):
     if type(n) == int:
         if n >= 0x7fffffffffffffff:
-            return -(0xffffffffffffffff - n + 1)
+            n = -(0xffffffffffffffff - n + 1)
     return n
 
 def uint2int(n):
@@ -53,7 +53,7 @@ class ParametersConverter:
                 elif propertyType == Color:
                     value = Color.fromJSON(propertyValue)
                 elif propertyType == 'long' or propertyType == 'long?':
-                    value = int(value)
+                    value = int(value)				
 
                 logging.debug(f"{currentPath} '{propertyInfo['Name']}': {value}")
                 result.append(Parameter(_id, value))
