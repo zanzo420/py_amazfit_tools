@@ -8,7 +8,7 @@ if __name__ == '__main__':
     import sys
     import argparse
     parser = argparse.ArgumentParser()
-    #parser.add_argument('--gtr', action='store_true', help='force GTR watchface')
+    parser.add_argument('--gts', action='store_true', help='force GTS watchface')
     parser.add_argument('--gtr', type=int, choices=[42,47], help='force GTR watchface')
     parser.add_argument('--file', nargs='+', help='''watchface.bin - unpacks watchface images and config
     watchface.json - packs config and referenced images to bin file''')

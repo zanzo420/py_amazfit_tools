@@ -2,7 +2,8 @@ import os
 import logging
 
 class Converter:
-    width_gtr = 454
+    width_gtr_47 = 454
+    width_gtr_42 = 390
     width_verge_lite = 360
     width_bip = 176
 
@@ -65,9 +66,13 @@ class Converter:
         im = Image.open(target_path)
         (w, h) = im.size
         if w == h:
-            if w == Converter.width_gtr:
-                self.source_size = Converter.width_gtr
-                print('GTR source')
+            if w == Converter.width_gtr_47:
+                self.source_size = Converter.width_gtr_47
+                print('GTR 47 source')
+                return
+            elif w == Converter.width_gtr_42:
+                self.source_size = Converter.width_gtr_42
+                print('GTR 42 source')
                 return
             elif w == Converter.width_bip:
                 self.source_size = Converter.width_bip

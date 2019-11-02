@@ -12,6 +12,7 @@ class WatchFace(ContainerElement):
         self._status = None
         self._battery = None
         self._analogDial = None
+        self._weather = None
         super(WatchFace, self).__init__(parameters, parameter = None, parent = None, name = '')
 
 
@@ -51,6 +52,10 @@ class WatchFace(ContainerElement):
         return self._analogDial
 
 
+    def getWeather(self):
+        return self._weather
+
+
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
         if parameterId == 2:
@@ -69,6 +74,10 @@ class WatchFace(ContainerElement):
             from watchFaceParser.models.elements.dateElement import DateElement
             self._date = DateElement(parameter)
             return self._date
+        # elif parameterId == 6:
+            # from watchFaceParser.models.elements.weatherElement import WeatherElement
+            # self._weather = WeatherElement(parameter)
+            # return self._weather
         elif parameterId == 7:
             from watchFaceParser.models.elements.stepsProgressElement import StepsProgressElement
             self._stepsProgress = StepsProgressElement(parameter)
