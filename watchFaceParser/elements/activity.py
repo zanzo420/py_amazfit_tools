@@ -12,6 +12,8 @@ class Activity:
         5: { 'Name': 'Steps', 'Type': FormattedNumber},
         7: { 'Name': 'StarImage', 'Type': Image}, #gtr
         9: { 'Name': 'CircleRange', 'Type': Image}, # verge
+        12: { 'Name': 'Unknown12', 'Type': 'long'}, # gts
 		13: { 'Name': 'NoDataImageIndex', 'Type': 'long'}, # verge
+        15: { 'Name': 'Unknown15', 'Type': 'long'}, # gts
     }
 
