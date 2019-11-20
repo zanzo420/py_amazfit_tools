@@ -9,5 +9,6 @@ class Date:
         2: { 'Name': 'WeekDay', 'Type': ImageSet},
         3: { 'Name': 'Unknown3', 'Type': DateUnknown3},
         4: { 'Name': 'Unknown4', 'Type': Coordinates},
+        5: { 'Name': 'Unknown5', 'Type': 'long?'}, #gts
     }
 
