@@ -15,6 +15,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     Config.setGtrMode(args.gtr)
+    Config.setGtsMode(args.gts)
 
     for inputFileName in args.file:
         isDirectory = os.path.isdir(inputFileName)
