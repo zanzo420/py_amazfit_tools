@@ -22,6 +22,8 @@ class Config:
     @staticmethod
     def setGtsMode(gts):
         Config._is_gts = 40
+        Config._image_size = 442
+        Config._preview_size = 266
 
     @staticmethod
     def isGtsMode():
