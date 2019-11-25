@@ -11,5 +11,5 @@ class CircleScale:
         7: { 'Name': 'Width', 'Type': 'long'},
         8: { 'Name': 'Color', 'Type': Color},
         9: { 'Name': 'Flatness', 'Type': 'long'}, #verge
-       10: { 'Name': 'Unknown10', 'Type': 'long'}, #gts circle.bin
+       10: { 'Name': 'ImageIndex', 'Type': 'long'}, #gts circle.bin
     }

@@ -15,6 +15,7 @@ class DateElement(ContainerElement):
 
 
     def getWeekDay(self):
+        print ("DEBUG: getWeekDay")
         return self._weekDay
 
 

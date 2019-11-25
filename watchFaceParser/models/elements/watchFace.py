@@ -21,6 +21,7 @@ class WatchFace(ContainerElement):
 
 
     def getTime(self):
+        print ("GETTIME")
         return self._time
 
 
@@ -52,8 +53,9 @@ class WatchFace(ContainerElement):
         return self._analogDial
 
 
-    def getWeather(self):
-        return self._weather
+    #def getWeather(self):
+    #    print ("GETWEATHER")
+    #    return self._weather
 
 
     def createChildForParameter(self, parameter):
@@ -74,29 +76,29 @@ class WatchFace(ContainerElement):
             from watchFaceParser.models.elements.dateElement import DateElement
             self._date = DateElement(parameter)
             return self._date
-        # elif parameterId == 6:
-            # from watchFaceParser.models.elements.weatherElement import WeatherElement
-            # self._weather = WeatherElement(parameter)
-            # return self._weather
-        elif parameterId == 7:
-            from watchFaceParser.models.elements.stepsProgressElement import StepsProgressElement
-            self._stepsProgress = StepsProgressElement(parameter)
-            return self._stepsProgress
-        elif parameterId == 8:
-            from watchFaceParser.models.elements.statusElement import StatusElement
-            self._status = StatusElement(parameter)
-            return self._status
-        elif parameterId == 9:
-            from watchFaceParser.models.elements.batteryElement import BatteryElement
-            self._battery = BatteryElement(parameter)
-            return self._battery
-        elif parameterId == 10:
-            from watchFaceParser.models.elements.analogDialElement import AnalogDialElement
-            self._analogDial = AnalogDialElement(parameter)
-            return self._analogDial
-        elif parameterId == 15:
-            from watchFaceParser.models.elements.daysProgressElement import DaysProgressElement
-            self._daysProgress = DaysProgressElement(parameter)
-            return self._daysProgress
+        #elif parameterId == 6:
+        #    from watchFaceParser.models.elements.weatherElement import WeatherElement
+        #    self._weather = WeatherElement(parameter)
+        #    return self._weather
+        #elif parameterId == 7:
+        #    from watchFaceParser.models.elements.stepsProgressElement import StepsProgressElement
+        #    self._stepsProgress = StepsProgressElement(parameter)
+        #    return self._stepsProgress
+        #elif parameterId == 8:
+        #    from watchFaceParser.models.elements.statusElement import StatusElement
+        #    self._status = StatusElement(parameter)
+        #    return self._status
+        #elif parameterId == 9:
+        #    from watchFaceParser.models.elements.batteryElement import BatteryElement
+        #    self._battery = BatteryElement(parameter)
+        #    return self._battery
+        #elif parameterId == 10:
+        #    from watchFaceParser.models.elements.analogDialElement import AnalogDialElement
+        #    self._analogDial = AnalogDialElement(parameter)
+        #    return self._analogDial
+        #elif parameterId == 15:
+        #    from watchFaceParser.models.elements.daysProgressElement import DaysProgressElement
+        #    self._daysProgress = DaysProgressElement(parameter)
+        #    return self._daysProgress
         else:
             return super(WatchFace, self).createChildForParameter(parameter)

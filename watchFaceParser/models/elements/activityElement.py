@@ -6,6 +6,7 @@ from watchFaceParser.models.elements.basic.containerElement import ContainerElem
 class ActivityElement(ContainerElement):
     def __init__(self, parameter, parent = None, name = None):
         self._stepsGoal = None
+        self._goal2 = None
         self._steps = None
         self._distance = None
         self._pulse = None
@@ -18,6 +19,8 @@ class ActivityElement(ContainerElement):
     def getStepsGoal(self):
         return self._stepsGoal
 
+    def getGoal2(self):
+        return self._goal2
 
     def getSteps(self):
         return self._steps
@@ -73,6 +76,11 @@ class ActivityElement(ContainerElement):
             from watchFaceParser.models.elements.common.imageElement import ImageElement
             self._circleRange = ImageElement(parameter = parameter, parent = self, name = '?CircleRange?')
             return self._circleRange
+        elif parameterId == 11:
+            from watchFaceParser.models.elements.activity.goal2Element import Goal2Element
+            self._goal2 = Goal2Element(parameter = parameter, parent = self, name = '?Goal2?')
+            return self._goal2
         else:
+            print ("unsupported parameterid",parameterId)
             return super(ActivityElement, self).createChildForParameter(parameter)
 
