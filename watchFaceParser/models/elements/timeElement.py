@@ -11,6 +11,7 @@ class TimeElement(ContainerElement):
         self._amPm = None
         # self._drawingOrder = None
         self._delimiter = None
+        self._delimiter2 = None
         self._pm = None
         super(TimeElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
@@ -38,6 +39,8 @@ class TimeElement(ContainerElement):
     def getDelimiter(self):
         return self._delimiter
 
+    def getDelimiter2(self):
+        return self._delimiter2
 
     def getPm(self):
         return self._pm
@@ -65,6 +68,8 @@ class TimeElement(ContainerElement):
             self.getSeconds().draw3(drawer, images, state.getTime().second)
         if self.getDelimiter():
             self.getDelimiter().draw3(drawer, images, state)
+        if self.getDelimiter2():
+            self.getDelimiter2().draw3(drawer, images, state)
 
         # if self.getPm():
         #     self.getPm().draw3(drawer, images, state)
@@ -94,6 +99,10 @@ class TimeElement(ContainerElement):
             from watchFaceParser.models.elements.common.imageElement import ImageElement
             self._delimiter = ImageElement(parameter = parameter, parent = self, name = 'Delimiter')
             return self._delimiter
+        elif parameterId == 11:
+            from watchFaceParser.models.elements.common.imageElement import ImageElement
+            self._delimiter2 = ImageElement(parameter = parameter, parent = self, name = 'Delimiter2')
+            return self._delimiter2
         elif parameterId == 12:
             from watchFaceParser.models.elements.time.pmElement import PmElement
             self._pm = PmElement(parameter = parameter, parent = self, name = 'Pm')

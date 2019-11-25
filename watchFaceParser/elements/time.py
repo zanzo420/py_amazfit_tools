@@ -12,7 +12,7 @@ class Time:
         5: { 'Name': 'DrawingOrder', 'Type': 'long?'},
         9: { 'Name': 'Unknown9', 'Type': 'long?'},
         10: { 'Name': 'Delimiter', 'Type': Image}, # verge
-        11: { 'Name': 'Unknown11', 'Type': 'long?'}, # gts
+        11: { 'Name': 'Delimiter2', 'Type': Image}, # gts
         12: { 'Name': 'PM', 'Type': Pm} # gtr?
     }
 

@@ -1,6 +1,6 @@
-﻿from watchFaceParser.models.elements.common.numberElement import NumberElement
+﻿from watchFaceParser.models.elements.common.circularProgressElement import CircularProgressElement
 
-class StepsGoalElement(NumberElement):
+class StepsGoalElement(CircularProgressElement):
     def __init__(self, parameter, parent, name = 'None'):
         super(StepsGoalElement, self).__init__(parameter, parent, name)
 

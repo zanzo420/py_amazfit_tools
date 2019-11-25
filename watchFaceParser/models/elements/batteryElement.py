@@ -32,6 +32,7 @@ class BatteryElement(ContainerElement):
         parameterId = parameter.getId()
         from watchFaceParser.models.elements.basic.valueElement import ValueElement
         if parameterId == 1:
+            print ("battery implemented",parameterId)
             from watchFaceParser.models.elements.battery.batteryNumberElement import BatteryNumberElement
             self._text = BatteryNumberElement(parameter = parameter, parent = self, name = '?_text?')
             return self._text
@@ -39,6 +40,9 @@ class BatteryElement(ContainerElement):
             from watchFaceParser.models.elements.battery.batteryGaugeElement import BatteryGaugeElement # temp.
             self._images = BatteryGaugeElement(parameter = parameter, parent = self, name = '?_images?')
             return self._images
+        elif parameterId == 4:
+            print ("battery unimplemented",parameterId)
+            pass
         elif parameterId == 6:
             from watchFaceParser.models.elements.common.imageElement import ImageElement
             self._percent = ImageElement(parameter = parameter, parent = self, name = '?_percent?')
