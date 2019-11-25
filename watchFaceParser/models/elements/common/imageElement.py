@@ -32,8 +32,8 @@ class ImageElement(CoordinatesElement):
             bitmap = images[self._imageIndex].getBitmap()
             from PIL import Image
 
-            temp = Image.new('RGBA', (Config.getImageSize(), Config.getImageSize()))
-            temp.paste(bitmap, (Config.getImageSizeHalf() - x, Config.getImageSizeHalf() - y), bitmap)
+            temp = Image.new('RGBA', Config.getImageSize())
+            temp.paste(bitmap, (Config.getImageSizeHalf()[0] - x, Config.getImageSizeHalf()[1] - y), bitmap)
             temp = temp.rotate(angle)
 
             if center is None:
