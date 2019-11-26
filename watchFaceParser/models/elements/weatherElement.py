@@ -14,13 +14,12 @@ class WeatherElement(ContainerElement):
 #        if self.getImages():
 #            self.getImages().draw3(drawer, images, 1)
 #
-#        if self.getIcon():
-#            pass
+        if self.getIcon():
+            pass
 #            print (state)
 #            self.getIcon().draw3(drawer, images, 1)
 
         if self.getTemperature():
-            print (state)
             self.getTemperature().draw3(drawer, images, 1)
 
 
@@ -28,11 +27,10 @@ class WeatherElement(ContainerElement):
         return self._images
 
     def getIcon(self):
-        print ("GETICON")
+        print ("GETWeateherICON")
         return self._icon
 
     def getTemperature(self):
-        print ("GETICON")
         return self._temperature
 
     def createChildForParameter(self, parameter):
@@ -49,7 +47,7 @@ class WeatherElement(ContainerElement):
 #            return self._icon
 			
         elif parameterId == 2: #temperature(text)
-            print ("WeatherElement: temperature(text) writing unsupported")
+            print ("WeatherElement: temperature(text) writing supported")
             from watchFaceParser.models.elements.weather.temperatureElement import TemperatureElement
             self._temperature = TemperatureElement(parameter = parameter, parent = self, name = 'Temperature')
             return self._temperature
