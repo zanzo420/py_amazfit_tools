@@ -2,7 +2,7 @@ import datetime
 
 
 class WatchState:
-    def __init__(self, BatteryLevel = 67, Pulse = 62, Steps = 14876, Calories = 764, Distance = 2367, Bluetooth = False, Unlocked = False, Alarm = False, DoNotDisturb = False):
+    def __init__(self, BatteryLevel = 67, Pulse = 62, Steps = 14876, Calories = 764, Distance = 2367, Weather = 1, Bluetooth = False, Unlocked = False, Alarm = False, DoNotDisturb = False):
         self._time = datetime.datetime.now().replace(hour = 10, minute = 10, second = 30)
         self._steps = Steps
         self._goal = 8000
@@ -14,7 +14,7 @@ class WatchState:
         self._unlocked = Unlocked
         self._alarm = Alarm
         self._doNotDisturb = DoNotDisturb
-
+        self._weather = Weather
 
     def getTime(self):
         return self._time
@@ -63,6 +63,8 @@ class WatchState:
     def getDoNotDisturb(self):
         return self._doNotDisturb
 
+    def getWeather(self):
+        return self._weather
 
     def toJSON(self):
         return {
@@ -77,6 +79,7 @@ class WatchState:
             'Unlocked': self._unlocked,
             'Alarm': self._alarm,
             'DoNotDisturb': self._doNotDisturb,
+            'Weather': self._weather
         }
 
     def datetimeToJson(self):
@@ -98,5 +101,6 @@ class WatchState:
         w._unlocked = j['Unlocked']
         w._alarm = j['Alarm']
         w._doNotDisturb = j['DoNotDisturb']
+        w._weather = j['Weather']
         return w
 

@@ -15,9 +15,8 @@ class WeatherElement(ContainerElement):
 #            self.getImages().draw3(drawer, images, 1)
 #
         if self.getIcon():
-            pass
-#            print (state)
-#            self.getIcon().draw3(drawer, images, 1)
+		    #render weather icon
+            self.getIcon().getImages().draw3(drawer, images, state.getWeather())
 
         if self.getTemperature():
             self.getTemperature().draw3(drawer, images, 1)
@@ -27,7 +26,6 @@ class WeatherElement(ContainerElement):
         return self._images
 
     def getIcon(self):
-        print ("GETWeateherICON")
         return self._icon
 
     def getTemperature(self):
@@ -36,24 +34,14 @@ class WeatherElement(ContainerElement):
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
         if parameterId == 1: #icon
-#             print ("WeatherElement: icon writing unsupported")
-#             pass
             from watchFaceParser.models.elements.weather.extendedWeatherElement import ExtendedWeatherElement
             self._icon = ExtendedWeatherElement(parameter = parameter, parent = self, name = 'Icon')
             return self._icon
-#            from watchFaceParser.models.elements.common.imageSetElement import ImageSetElement
-#            self._icon = ImageSetElement(parameter = parameter, parent = self, name = '?_images?')
-#            print ("SELF_ICON",self._icon)
-#            return self._icon
-			
         elif parameterId == 2: #temperature(text)
             print ("WeatherElement: temperature(text) writing supported")
             from watchFaceParser.models.elements.weather.temperatureElement import TemperatureElement
             self._temperature = TemperatureElement(parameter = parameter, parent = self, name = 'Temperature')
             return self._temperature
-#            from watchFaceParser.models.elements.common.twoDigitsElement import TwoDigitsElement
-#            self._minutes = TwoDigitsElement(parameter = parameter, parent = self, name = 'Minutes')
-#            return self._minutes
 #        elif parameterId == 3:
 #            from watchFaceParser.models.elements.common.twoDigitsElement import TwoDigitsElement
 #            self._seconds = TwoDigitsElement(parameter = parameter, parent = self, name = 'Seconds')

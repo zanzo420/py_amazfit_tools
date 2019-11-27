@@ -7,4 +7,4 @@ class StepsGoalElement(CircularProgressElement):
     def draw3(self, drawer, resources, state):
         assert(type(resources) == list)
         if state.getGoal():
-            self.draw4(drawer, resources, state.getGoal())
+            self.draw4(drawer, resources, state.getGoal(), 100)
