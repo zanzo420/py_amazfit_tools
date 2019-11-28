@@ -22,7 +22,7 @@ class TemperatureElement(NumberElement):
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
         if parameterId == 1:
-            print ("TemperatureElement: (CURRENT_TEMPERATURE) supported", parameterId)
+            print ("TemperatureElement: (Temperature->Current)", parameterId)
             #from watchFaceParser.models.elements.weather.temperature.oneLineTemperatureElement import OneLineTemperatureElement
             #self._oneLine = OneLineTemperatureElement(parameter = parameter, parent = self, name = 'OneLineTemperatureElement')
             #return self._oneLine
@@ -30,8 +30,11 @@ class TemperatureElement(NumberElement):
             self._temperature = NumberElement(parameter = parameter, parent = self, name = 'Temperature')
             print ("DEBUG",self._temperature)
             return self._temperature
+        elif parameterId == 2:
+            print ("TemperatureElement: (Temperature->Today)", parameterId)
+            pass
         elif parameterId == 3:
-            print ("TemperatureElement: unsupported", parameterId)
+            print ("TemperatureElement: (Temperature->Symbols)", parameterId)
             pass
         else:
             return super(TemperatureElement, self).createChildForParameter(parameter)
