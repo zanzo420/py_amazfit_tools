@@ -15,7 +15,8 @@ class BatteryNumberElement(NumberElement):
         images = self._parent.getText().getImagesForNumber(resources, state.getBatteryLevel())
 		
         print ("DEBUGGGG-",images)
-        images.append(resources[self._parent.getPercent().getImageIndex()])
+        if self._parent.getPercent():
+            images.append(resources[self._parent.getPercent().getImageIndex()])
 
         from watchFaceParser.helpers.drawerHelper import DrawerHelper
         DrawerHelper.drawImages(drawer, images, uint2int(self._parent.getText().getSpacing()), self._parent.getText().getAlignment(), self._parent.getText().getBox())
