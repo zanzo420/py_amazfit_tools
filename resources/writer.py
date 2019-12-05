@@ -21,7 +21,7 @@ class Writer:
 
         cur_pos = self._stream.tell()
         #num_padding = 4 - cur_pos % 4
-		num_padding = cur_pos % 4 #gts
+        num_padding = cur_pos % 4 #gts
         offset = num_padding
         print ("o",cur_pos)
 
