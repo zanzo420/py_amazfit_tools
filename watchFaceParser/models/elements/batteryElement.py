@@ -9,6 +9,7 @@ class BatteryElement(ContainerElement):
         self._percent = None
         self._scale = None
         self._images = None
+        self._unknown4 = None
         super(BatteryElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
 
@@ -44,6 +45,12 @@ class BatteryElement(ContainerElement):
             pass
         elif parameterId == 4: #unknown4
             print ("battery unimplemented: unknown4",parameterId)
+            #from watchFaceParser.models.elements.battery.unknown4Element import Unknown4Element
+            #self._unknown4 = Unknown4Element(parameter = parameter, parent = self, name = 'Unknown4')
+            #return self._unknown4
+            from watchFaceParser.models.elements.analogDial.secondsClockHandElement import SecondsClockHandElement # must must be own. fix it!!
+            self._unknown4 = SecondsClockHandElement(parameter = parameter, parent = self, name = 'Unknown4')
+            return self._unknown4			
             pass
         elif parameterId == 6: #percent
             #from watchFaceParser.models.elements.common.imageElement import ImageElement

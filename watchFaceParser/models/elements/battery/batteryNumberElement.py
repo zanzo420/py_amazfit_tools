@@ -14,7 +14,7 @@ class BatteryNumberElement(NumberElement):
 		
         images = self._parent.getText().getImagesForNumber(resources, state.getBatteryLevel())
 		
-        print ("DEBUGGGG-",images)
+        #print ("DEBUGGGG-",images)
         if self._parent.getPercent():
             images.append(resources[self._parent.getPercent().getImageIndex()])
 
