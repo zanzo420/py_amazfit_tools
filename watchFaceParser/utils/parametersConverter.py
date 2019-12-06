@@ -2,23 +2,12 @@ import logging
 import os.path
 
 from watchFaceParser.utils.elementsHelper import ElementsHelper
+from watchFaceParser.utils.integerConverter import uint2int
 from watchFaceParser.models.parameterFlags import ParameterFlags
 from watchFaceParser.models.textAlignment import TextAlignment
 from watchFaceParser.models.color import Color
 from watchFaceParser.models.parameter import Parameter
 
-
-def ulong2long(n):
-    if type(n) == int:
-        if n >= 0x7fffffffffffffff:
-            n = -(0xffffffffffffffff - n + 1)
-    return n
-
-def uint2int(n):
-    if type(n) == int:
-        if n >= 0x7fffffff:
-            return -(0xffffffff - n + 1)
-    return n
 
 class ParametersConverter:
     @staticmethod
@@ -177,9 +166,9 @@ class ParametersConverter:
                 elif propertyType == 'bool':
                     setattr(result, propertyInfoName, parameter.getValue() > 0)
                 elif propertyType == 'long':
-                    setattr(result, propertyInfoName, ulong2long(parameter.getValue()))
+                    setattr(result, propertyInfoName, uint2int(parameter.getValue()))
                 else:
-                    setattr(result, propertyInfoName, ulong2long(parameter.getValue() or None))
+                    setattr(result, propertyInfoName, uint2int(parameter.getValue() or None))
             elif propertyType == '[]':
                 assert(False) # not tested yet
             else:		

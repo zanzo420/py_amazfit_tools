@@ -2,19 +2,8 @@ import logging
 import io
 
 from watchFaceParser.models.parameterFlags import ParameterFlags
-
-def ulong2long(n):
-    if type(n) == int:
-        if n >= 0x7fffffffffffffff:
-            n = -(0xffffffffffffffff - n + 1)
-    return n
-
-def long2ulong(n):
-    if type(n) == int:
-        if n < 0:
-            #n = (0xffffffffffffffff + n + 1) & 0xffffffff
-            n = (0xffffffffffffffff + n + 1) #fix negative integers
-    return n
+from watchFaceParser.utils.integerConverter import long2ulong
+from watchFaceParser.utils.integerConverter import uint2int
 
 
 class Parameter:
@@ -26,7 +15,7 @@ class Parameter:
             self._flags = flags
         elif type(value) == int:
             self._id = _id
-            self._value = ulong2long(value)
+            self._value = uint2int(value)
             self._children = None
             self._flags = None
         elif type(value) == list:
