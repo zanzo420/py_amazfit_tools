@@ -7,6 +7,7 @@ class WatchFace(ContainerElement):
         self._time = None
         self._activity = None
         self._date = None
+        self._weather = None
         self._stepsProgress = None
         self._daysProgress = None
         self._status = None
@@ -31,6 +32,10 @@ class WatchFace(ContainerElement):
 
     def getDate(self):
         return self._date
+
+
+    def getWeather(self):
+        return self._weather
 
 
     def getStepsProgress(self):

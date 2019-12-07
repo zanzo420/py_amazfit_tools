@@ -1,48 +1,59 @@
-﻿from watchFaceParser.models.elements.common.numberElement import NumberElement
-from watchFaceParser.utils.parametersConverter import uint2int
+import logging
+
+from watchFaceParser.models.elements.basic.compositeElement import CompositeElement
+from watchFaceParser.utils.integerConverter import uint2int
 
 
-class TemperatureElement(NumberElement):
-    def __init__(self, parameter, parent, name = 'None'):
-        self._temperature = None
+class TemperatureElement(CompositeElement):
+    def __init__(self, parameter, parent, name = None):
+        self._current = None
         self._symbols = None
-        super(TemperatureElement, self).__init__(parameter, parent, name)
+        super(TemperatureElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
-    def getTemperature(self):
-        return self._temperature
+
+    def getCurrent(self):
+        return self._current
+
 
     def getSymbols(self):
         return self._symbols
-		
+
+
     def draw3(self, drawer, resources, state):
         assert(type(resources) == list)
-        temperature = self._parent
+        images = []
 
-        if self.getTemperature():
-            images = self.getTemperature().getImagesForNumber(resources, 27, 2) #fixed temperature for now....
-		    
-            #print ("DEBUGGGG",self.getSymbols().getDegreesImageIndex())
-            images.append(resources[self.getSymbols().getDegreesImageIndex()])
+        temperature = state.getCurrentTemperature()
+        if not temperature:
+            if self.getSymbols().getNoDataImageIndex():
+                images.append(resources[self.getSymbols().getNoDataImageIndex()])
+        else:
+            temperature = int(temperature)
+            if temperature < 0:
+                temperature = -temperature
+                if self.getSymbols().getMinusImageIndex():
+                    images.append(resources[self.getSymbols().getMinusImageIndex()])
 
-            from watchFaceParser.helpers.drawerHelper import DrawerHelper
-            DrawerHelper.drawImages(drawer, images, uint2int(self.getTemperature().getSpacing()), self.getTemperature().getAlignment(), self.getTemperature().getBox())
+            images.extend(self.getCurrent().getImagesForNumber(resources, temperature))
+
+            if self.getSymbols().getDegreesImageIndex():
+                images.append(resources[self.getSymbols().getDegreesImageIndex()])
+
+        from watchFaceParser.helpers.drawerHelper import DrawerHelper
+        DrawerHelper.drawImages(drawer, images, uint2int(self.getCurrent().getSpacing()), self.getCurrent().getAlignment(), self.getCurrent().getBox())
+
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
+
         if parameterId == 1:
-            #print ("TemperatureElement: (Temperature->Current)", parameterId)
             from watchFaceParser.models.elements.common.numberElement import NumberElement
-            self._temperature = NumberElement(parameter = parameter, parent = self, name = 'Temperature')
-            #print ("DEBUG",self._temperature)
-            return self._temperature
-        elif parameterId == 2:
-            #print ("TemperatureElement: (Temperature->Today)", parameterId)
-            pass
+            self._current = NumberElement(parameter, self, '?_current?')
+            return self._current
         elif parameterId == 3:
-            #print ("TemperatureElement: (Temperature->Symbols)", parameterId)
             from watchFaceParser.models.elements.weather.symbolsElement import SymbolsElement
-            self._symbols = SymbolsElement(parameter = parameter, parent = self, name = 'Symbols')
-            #print ("DEBUG",self._symbols)
+            self._symbols = SymbolsElement(parameter, self, '?_symbols?')
             return self._symbols
         else:
-            return super(TemperatureElement, self).createChildForParameter(parameter)
+            super(TemperatureElement, self).createChildForParameter(parameter)
+
