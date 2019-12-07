@@ -15,8 +15,7 @@ class OneLineYearElement(CompositeElement):
         return self._number
 
     def getDelimiterImageIndex(self):
-        return self._delimiterImageIndex.getValue()
-
+        return self._delimiterImageIndex
 
     def draw3(self, drawer, resources, state):
         assert(type(resources) == list)
@@ -26,7 +25,8 @@ class OneLineYearElement(CompositeElement):
         images = self.getNumber().getImagesForNumber(resources, state.getTime().year, 4)
         #print ("draw3",images)
 		
-        images.append(resources[self.getDelimiterImageIndex()])
+        if self.getDelimiterImageIndex():
+            images.append(resources[self.getDelimiterImageIndex().getValue()])
         #for image in self.getNumber().getImagesForNumber(resources, state.getTime().day, 2 if monthAndDay.getTwoDigitsDay() else 1):
         #    images.append(image)
 

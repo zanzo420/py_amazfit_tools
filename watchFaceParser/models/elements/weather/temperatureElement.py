@@ -17,14 +17,15 @@ class TemperatureElement(NumberElement):
     def draw3(self, drawer, resources, state):
         assert(type(resources) == list)
         temperature = self._parent
-		
-        images = self.getTemperature().getImagesForNumber(resources, 27, 2) #fixed temperature for now....
-		
-        #print ("DEBUGGGG",self.getSymbols().getDegreesImageIndex())
-        images.append(resources[self.getSymbols().getDegreesImageIndex()])
 
-        from watchFaceParser.helpers.drawerHelper import DrawerHelper
-        DrawerHelper.drawImages(drawer, images, uint2int(self.getTemperature().getSpacing()), self.getTemperature().getAlignment(), self.getTemperature().getBox())
+        if self.getTemperature():
+            images = self.getTemperature().getImagesForNumber(resources, 27, 2) #fixed temperature for now....
+		    
+            #print ("DEBUGGGG",self.getSymbols().getDegreesImageIndex())
+            images.append(resources[self.getSymbols().getDegreesImageIndex()])
+
+            from watchFaceParser.helpers.drawerHelper import DrawerHelper
+            DrawerHelper.drawImages(drawer, images, uint2int(self.getTemperature().getSpacing()), self.getTemperature().getAlignment(), self.getTemperature().getBox())
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
