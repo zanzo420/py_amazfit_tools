@@ -70,5 +70,9 @@ All credit goes to Валерий Миронов(https://bitbucket.org/valeronm/
 
 ### analog hands' releative position (only works for GTR)
 
+### weather info
+* preview only
+* not works for verge lite
+
 ## why python instead of C#
 just for fun!
