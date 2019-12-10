@@ -67,6 +67,28 @@ class ParametersConverter:
 
         return result
 
+    @staticmethod
+    def childIsList(paramType, descriptor, path = ""):
+        assert(type(descriptor) == type([]))
+        assert(type(path) == type(""))
+        properties = ElementsHelper.sortedProperties(paramType)
+
+        for parameter in descriptor:
+            parameterId = parameter.getId()
+
+            currentPath = str(parameterId) if not path else os.path.join(path, '.', str(parameterId))
+
+            if parameterId not in properties:
+                logging.warn(f"[ParamConv:parse] currentPath {currentPath} / Parameter {parameterId} isn't supported for {currentType}")
+                raise IndexError(f"Parameter {parameterId} isn't supported for {currentType}")
+
+            propertyInfo = properties[parameterId]
+
+            if isinstance(propertyInfo['Type'],list):
+                childIsList = True
+            else:
+                childIsList = False
+        return childIsList
 
     @staticmethod
     def parse(paramType, descriptor, path = ""):
@@ -76,15 +98,27 @@ class ParametersConverter:
         result = paramType()
         currentType = paramType
 
+        prevPath = None
+        artmp=[]
+
         for parameter in descriptor:
             parameterId = parameter.getId()
+
             currentPath = str(parameterId) if not path else os.path.join(path, '.', str(parameterId))
+
             if parameterId not in properties:
                 logging.warn(f"[ParamConv:parse] currentPath {currentPath} / Parameter {parameterId} isn't supported for {currentType}")
                 raise IndexError(f"Parameter {parameterId} isn't supported for {currentType}")
 
             propertyInfo = properties[parameterId]
-            propertyType = propertyInfo['Type']
+            
+            if isinstance(propertyInfo['Type'],list):
+                propertyType = propertyInfo['Type'][0]
+            else:
+                propertyType = propertyInfo['Type']
+			
+            if "SubType" in propertyInfo:
+                propertySubType = propertyInfo['SubType']
 
             propertyInfoName = propertyInfo['Name']
 
@@ -103,12 +137,22 @@ class ParametersConverter:
                 assert(False) # not tested yet
             else:		
                 tmp = propertyType()	
+                childIsList = False
+                artmp = []
                 for x in parameter.getChildren():
+                    if not childIsList:
+                        childIsList = ParametersConverter.childIsList(propertyType, [x], currentPath)
+
                     psd = ParametersConverter.parse(propertyType, [x], currentPath)
                     import json
 
                     for kk in psd.__dict__:
                         vv = psd.__dict__[kk]
-                        setattr(tmp, kk, vv)
+                        if not childIsList:
+                            setattr(tmp, kk, vv)
+                        else:
+                            artmp.append(vv)
+                    if childIsList:
+                        setattr(tmp, kk, artmp)
                 setattr(result, propertyInfoName, tmp)
         return result

@@ -3,7 +3,7 @@ from watchFaceParser.elements.basicElements.image import Image
 from watchFaceParser.elements.batteryElements.unknownType4 import UnknownType4
 from watchFaceParser.elements.basicElements.imageSet import ImageSet
 from watchFaceParser.elements.basicElements.circleScale import CircleScale
-from watchFaceParser.elements.batteryElements.iconSet import IconSet
+from watchFaceParser.elements.basicElements.iconSet import IconSet
 
 class Battery:
     definitions = {

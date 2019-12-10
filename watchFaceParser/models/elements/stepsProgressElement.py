@@ -39,10 +39,11 @@ class StepsProgressElement(ContainerElement):
             from watchFaceParser.models.elements.goalProgress.stepGaugeElement import StepGaugeElement # temp.
             self._images1 = StepGaugeElement(parameter = parameter, parent = self, name = '?_images?')
             return self._images1
-        elif parameterId == 2:
-            from watchFaceParser.models.elements.goalProgress.stepGaugeElement import StepGaugeElement # temp.
-            self._images2 = StepGaugeElement(parameter = parameter, parent = self, name = '?_images?')
-            return self._images2
+#        elif parameterId == 2:
+#
+#            from watchFaceParser.models.elements.goalProgress.stepGaugeElement import StepGaugeElement # temp.
+#            self._images2 = StepGaugeElement(parameter = parameter, parent = self, name = '?_images?')
+#            return self._images2
         elif parameterId == 4:
             from watchFaceParser.models.elements.goalProgress.stepGaugeElement import StepGaugeElement # temp.
             self._images4 = StepGaugeElement(parameter = parameter, parent = self, name = '?_images?')

@@ -8,5 +8,6 @@ class StepGaugeElement(ImageSetElement):
 
     def draw3(self, drawer, resources, state):
         assert(type(resources) == list)
-        super(StepGaugeElement, self).draw3(drawer, resources, int(state.getSteps() / state.getGoal() * self.getImagesCount()))
+        print ("StepGaugeElement-self.getImagesCount()",self.getImagesCount())
+        #super(StepGaugeElement, self).draw3(drawer, resources, int(state.getSteps() / state.getGoal() * self.getImagesCount()))
 

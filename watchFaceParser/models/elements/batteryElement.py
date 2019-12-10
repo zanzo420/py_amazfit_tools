@@ -40,22 +40,15 @@ class BatteryElement(ContainerElement):
             from watchFaceParser.models.elements.battery.batteryGaugeElement import BatteryGaugeElement # temp.
             self._images = BatteryGaugeElement(parameter = parameter, parent = self, name = '?_images?')
             return self._images
-        elif parameterId == 3: #icons
+        elif parameterId == 3: #icons - this is the circular battery element found in GTS - Silver Watchface
             print ("battery unimplemented: icons",parameterId)
             pass
         elif parameterId == 4: #unknown4
-            print ("battery unimplemented: unknown4",parameterId)
-            #from watchFaceParser.models.elements.battery.unknown4Element import Unknown4Element
-            #self._unknown4 = Unknown4Element(parameter = parameter, parent = self, name = 'Unknown4')
-            #return self._unknown4
             from watchFaceParser.models.elements.analogDial.secondsClockHandElement import SecondsClockHandElement # must must be own. fix it!!
             self._unknown4 = SecondsClockHandElement(parameter = parameter, parent = self, name = 'Unknown4')
             return self._unknown4			
             pass
         elif parameterId == 6: #percent
-            #from watchFaceParser.models.elements.common.imageElement import ImageElement
-            #self._percent = ImageElement(parameter = parameter, parent = self, name = '?_percent?')
-            #return self._percent
             from watchFaceParser.models.elements.battery.percentElement import PercentElement
             self._percent = PercentElement(parameter = parameter, parent = self, name = 'Percent')
             return self._percent
