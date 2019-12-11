@@ -31,15 +31,21 @@ class ParametersConverter:
     @staticmethod
     def build(T, serializable, path = ""):
         result = []
-
+        #print ("T",T)
         properties = ElementsHelper.sortedProperties(T)
+        print ("X",properties)
         for _id in properties:
             currentPath = str(_id) if path == None or path == '' else ''.join([path, '.', str(_id)])
 
             propertyInfo = properties[_id]
-            propertyType = propertyInfo['Type']
-
+            #propertyType = propertyInfo['Type']
+            if isinstance(propertyInfo['Type'],list):
+                propertyType = propertyInfo['Type'][0]
+            else:
+                propertyType = propertyInfo['Type']
+				
             propertyValue = ParametersConverter.getValue(propertyInfo, serializable)
+            print("QUI",propertyInfo['Name'],serializable,propertyValue)
 
             if propertyValue is None:
                 continue
@@ -57,13 +63,49 @@ class ParametersConverter:
 
                 logging.debug(f"{currentPath} '{propertyInfo['Name']}': {value}")
                 result.append(Parameter(_id, value))
+            #elif isinstance(propertyValue,list): 
+            #    print ("e' una lista... fai qualcosa",propertyType)
+            #    for i in propertyValue:
+            #        print ("I1",i)
+            #        innerParameters = ParametersConverter.build(propertyType, i, currentPath)
+            #        print ("I2",i,innerParameters)
+            #        if len(innerParameters) > 0:
+            #            logging.debug(f"{currentPath} '{propertyInfo['Name']}'")
+            #            result.append(Parameter(_id, innerParameters))
+            #        else:
+            #            logging.debug(f"{currentPath} '{propertyInfo['Name']}': Skipped because of empty(loop)")
             else:
+
+#                logging.debug ("childIsList "+str(childIsList)+" "+str(propertyType))
+                if isinstance(propertyValue,list):
+                    for i in propertyValue:
+                        d={}
+                        d[propertyInfo['Name']] = i
+                        print ("1propertyType",propertyType, d, currentPath )			
+                        innerParameters = ParametersConverter.build(propertyType, i, currentPath)
+                        logging.debug(i)
+
+                        if len(innerParameters) > 0:
+                            #print ("I0",propertyType, propertyValue)
+                            logging.debug(f"{currentPath} '{propertyInfo['Name']}'")
+                            result.append(Parameter(_id, innerParameters))
+                        else:
+                            logging.debug(f"{currentPath} '{propertyInfo['Name']}': Skipped because of empty1")
+                    continue
                 innerParameters = ParametersConverter.build(propertyType, propertyValue, currentPath)
+                print ("2propertyType",propertyType, propertyValue, currentPath )			
+                logging.debug(propertyValue)
+                logging.debug(propertyType)
+#            if not childIsList:
+
                 if len(innerParameters) > 0:
+                    #print ("Ip",innerParameters)
                     logging.debug(f"{currentPath} '{propertyInfo['Name']}'")
                     result.append(Parameter(_id, innerParameters))
                 else:
-                    logging.debug(f"{currentPath} '{propertyInfo['Name']}': Skipped because of empty")
+                    logging.debug(f"{currentPath} '{propertyInfo['Name']}': Skipped because of empty2")
+                    print ("propertyType",propertyType, propertyValue )			
+                    sys.exit(1)
 
         return result
 
