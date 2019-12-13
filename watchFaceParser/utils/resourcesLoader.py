@@ -46,6 +46,7 @@ class ResourcesLoader:
         assert(type(path) == str)
         if path != None and path != '':
             logging.debug(f"Loading resources for {path} '{T}'")
+        print (f"Loading resources for {path} '{T}'")
 
         lastImageIndexValue = None
         properties = ElementsHelper.sortedProperties(T)
@@ -53,7 +54,11 @@ class ResourcesLoader:
             currentPath = str(_id) if path == None or path == '' else ''.join([path, '.', str(_id)])
 
             propertyInfo = properties[_id]
-            propertyType = propertyInfo['Type']
+            #propertyType = propertyInfo['Type']
+            if isinstance(propertyInfo['Type'],list):
+                propertyType = propertyInfo['Type'][0]
+            else:
+                propertyType = propertyInfo['Type']
             propertyValue = ResourcesLoader.getValue(propertyInfo, serializable) # propertyInfo.getValue(serializable, None)
 
             imageIndexAttribute = ElementsHelper.getCustomAttributeFor('ImageIndex', propertyInfo)
@@ -89,6 +94,9 @@ class ResourcesLoader:
                     for i in range(lastImageIndexValue + 1, lastImageIndexValue + imagesCount):
                         self.loadImage(i)
             else:
+                if isinstance(propertyValue,list):
+                    for i in range(lastImageIndexValue+1, lastImageIndexValue+len(propertyValue)):
+                        self.loadImage(i)
                 if imagesCountAttribute == None and imageIndexAttribute == None:
                     if propertyValue != None:
                         self.process(propertyType, propertyValue, currentPath)
@@ -104,6 +112,7 @@ class ResourcesLoader:
 
         newImageIndex = len(self._resources)
         logging.debug(f"Loading image {newImageIndex}...")
+        print(f"Loading image {newImageIndex}...")
         from resources.imageLoader import ImageLoader
         resource = ImageLoader.loadResourceForNumber(self._imagesDirectory, index)
         self._resources.append(resource)

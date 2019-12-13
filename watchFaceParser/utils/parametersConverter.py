@@ -33,7 +33,7 @@ class ParametersConverter:
         result = []
         #print ("T",T)
         properties = ElementsHelper.sortedProperties(T)
-        print ("X",properties)
+#        print ("X",properties)
         for _id in properties:
             currentPath = str(_id) if path == None or path == '' else ''.join([path, '.', str(_id)])
 
@@ -45,7 +45,7 @@ class ParametersConverter:
                 propertyType = propertyInfo['Type']
 				
             propertyValue = ParametersConverter.getValue(propertyInfo, serializable)
-            print("QUI",propertyInfo['Name'],serializable,propertyValue)
+#            print("QUI",propertyInfo['Name'],serializable,propertyValue)
 
             if propertyValue is None:
                 continue
@@ -79,11 +79,11 @@ class ParametersConverter:
 #                logging.debug ("childIsList "+str(childIsList)+" "+str(propertyType))
                 if isinstance(propertyValue,list):
                     for i in propertyValue:
-                        d={}
-                        d[propertyInfo['Name']] = i
-                        print ("1propertyType",propertyType, d, currentPath )			
+                        #d={}
+                        #d[propertyInfo['Name']] = i
+#                        print ("1propertyType",propertyType, d, currentPath )			
                         innerParameters = ParametersConverter.build(propertyType, i, currentPath)
-                        logging.debug(i)
+                        #logging.debug(i)
 
                         if len(innerParameters) > 0:
                             #print ("I0",propertyType, propertyValue)
@@ -93,9 +93,9 @@ class ParametersConverter:
                             logging.debug(f"{currentPath} '{propertyInfo['Name']}': Skipped because of empty1")
                     continue
                 innerParameters = ParametersConverter.build(propertyType, propertyValue, currentPath)
-                print ("2propertyType",propertyType, propertyValue, currentPath )			
-                logging.debug(propertyValue)
-                logging.debug(propertyType)
+ #               print ("2propertyType",propertyType, propertyValue, currentPath )			
+  #              logging.debug(propertyValue)
+  #              logging.debug(propertyType)
 #            if not childIsList:
 
                 if len(innerParameters) > 0:
@@ -104,7 +104,7 @@ class ParametersConverter:
                     result.append(Parameter(_id, innerParameters))
                 else:
                     logging.debug(f"{currentPath} '{propertyInfo['Name']}': Skipped because of empty2")
-                    print ("propertyType",propertyType, propertyValue )			
+ #                   print ("propertyType",propertyType, propertyValue )			
                     sys.exit(1)
 
         return result
