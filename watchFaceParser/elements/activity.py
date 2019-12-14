@@ -16,7 +16,7 @@ class Activity:
         9: { 'Name': 'CircleRange', 'Type': Image}, # verge
         11: { 'Name': 'Goal2', 'Type': CircleScale}, # gts circle.bin
         12: { 'Name': 'Unknown12', 'Type': 'long'}, # gts
-		13: { 'Name': 'NoDataImageIndex', 'Type': 'long'}, # verge
+        13: { 'Name': 'NoDataImageIndex', 'Type': 'long'}, # verge
         15: { 'Name': 'Unknown15', 'Type': 'long'}, # gts
         17: { 'Name': 'Unknown17', 'Type': UnknownType}, # gts circle.bin
     }
