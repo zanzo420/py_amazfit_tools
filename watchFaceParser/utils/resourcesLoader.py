@@ -145,9 +145,9 @@ class ResourcesLoader:
             logging.debug(f"Loading image {newImageIndex}...")
             print(f"Loading image {newImageIndex}...")
             from resources.imageLoader import ImageLoader
-            resource = ImageLoader.loadResourceForNumber(self._imagesDirectory, index)
+            resource = ImageLoader.loadResourceForNumber(self._imagesDirectory, i)
             self._resources.append(resource)
-            self._mapping[index] = newImageIndex
+            self._mapping[i] = newImageIndex
         print ("XXXX",index,newImageIndex)
         return newImageIndex
  
