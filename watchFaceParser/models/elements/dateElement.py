@@ -12,15 +12,15 @@ class DateElement(ContainerElement):
 
 
     def getMonthAndDay(self):
-        print ("DEBUG: getMonthAndDay")
+        #print ("DEBUG: getMonthAndDay")
         return self._monthAndDay
 
     def getWeekDay(self):
-        print ("DEBUG: getWeekDay")
+        #print ("DEBUG: getWeekDay")
         return self._weekDay
 
     def getYear(self):
-        print ("DEBUG: getYear")
+        #print ("DEBUG: getYear")
         return self._year
 
     def createChildForParameter(self, parameter):

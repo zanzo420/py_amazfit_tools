@@ -46,6 +46,6 @@ class SymbolsElement(CompositeElement):
             self._noDataImageIndex = parameter.getValue()
             return ValueElement(parameter = parameter, parent = self, name = 'NoDataImageIndex')
         else:
-            print ("SymbolsElement",parameterId)
+#            print ("SymbolsElement",parameterId)
             return super(SymbolsElement, self).createChildForParameter(parameter)
 

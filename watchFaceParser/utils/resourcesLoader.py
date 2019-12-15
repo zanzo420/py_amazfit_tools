@@ -46,7 +46,7 @@ class ResourcesLoader:
         assert(type(path) == str)
         if path != None and path != '':
             logging.debug(f"Loading resources for {path} '{T}'")
-        print (f"Loading resources for {path} '{T}'")
+#        print (f"Loading resources for {path} '{T}'")
 
         lastImageIndexValue = None
         properties = ElementsHelper.sortedProperties(T)
@@ -63,7 +63,7 @@ class ResourcesLoader:
 
             imageIndexAttribute = ElementsHelper.getCustomAttributeFor('ImageIndex', propertyInfo)
             imagesCountAttribute = ElementsHelper.getCustomAttributeFor('ImagesCount', propertyInfo)
-            print("INDEX",imageIndexAttribute,propertyInfo['Name'],propertyValue)
+#            print("INDEX",imageIndexAttribute,propertyInfo['Name'],propertyValue)
 
             if imagesCountAttribute != None and imageIndexAttribute != None:
                 raise IndexError(
@@ -76,7 +76,7 @@ class ResourcesLoader:
                     imageIndex = propertyValue
 
                     lastImageIndexValue = imageIndex
-                    print("INDEX",imageIndexAttribute,propertyInfo['Name'],propertyValue,imageIndex)
+ #                   print("INDEX",imageIndexAttribute,propertyInfo['Name'],propertyValue,imageIndex)
                     mappedIndex = self.loadImage(imageIndex)
                     propertyInfoName = propertyInfo['Name']
                     serializable[propertyInfoName] = mappedIndex
@@ -143,12 +143,12 @@ class ResourcesLoader:
  
             newImageIndex = i
             logging.debug(f"Loading image {newImageIndex}...")
-            print(f"Loading image {newImageIndex}...")
+#            print(f"Loading image {newImageIndex}...")
             from resources.imageLoader import ImageLoader
             resource = ImageLoader.loadResourceForNumber(self._imagesDirectory, i)
             self._resources.append(resource)
             self._mapping[i] = newImageIndex
-        print ("XXXX",index,newImageIndex)
+#        print ("XXXX",index,newImageIndex)
         return newImageIndex
  
     def loadImage_orig(self, index):
@@ -158,7 +158,6 @@ class ResourcesLoader:
 
         newImageIndex = len(self._resources)
         logging.debug(f"Loading image {newImageIndex}...")
-        print(f"Loading image {newImageIndex}...")
         from resources.imageLoader import ImageLoader
         resource = ImageLoader.loadResourceForNumber(self._imagesDirectory, index)
         self._resources.append(resource)

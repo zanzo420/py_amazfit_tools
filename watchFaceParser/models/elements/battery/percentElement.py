@@ -25,6 +25,6 @@ class PercentElement(CompositeElement):
             self._imageIndex = parameter.getValue()
             return ValueElement(parameter = parameter, parent = self, name = 'ImageIndex')
         else:
-            print ("PercentElement",parameterId)
+#            print ("PercentElement",parameterId)
             return super(PercentElement, self).createChildForParameter(parameter)
 

@@ -41,7 +41,7 @@ class BatteryElement(ContainerElement):
             self._images = BatteryGaugeElement(parameter = parameter, parent = self, name = '?_images?')
             return self._images
         elif parameterId == 3: #icons - this is the circular battery element found in GTS - Silver Watchface
-            print ("battery unimplemented: icons",parameterId)
+            #print ("battery unimplemented: icons",parameterId)
             pass
         elif parameterId == 4: #unknown4
             from watchFaceParser.models.elements.analogDial.secondsClockHandElement import SecondsClockHandElement # must must be own. fix it!!

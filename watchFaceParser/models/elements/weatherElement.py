@@ -38,7 +38,7 @@ class WeatherElement(ContainerElement):
             self._icon = ExtendedWeatherElement(parameter = parameter, parent = self, name = 'Icon')
             return self._icon
         elif parameterId == 2: #temperature(text)
-            print ("WeatherElement: temperature(text) writing supported")
+#            print ("WeatherElement: temperature(text) writing supported")
             from watchFaceParser.models.elements.weather.temperatureElement import TemperatureElement
             self._temperature = TemperatureElement(parameter = parameter, parent = self, name = 'Temperature')
             return self._temperature
@@ -61,6 +61,6 @@ class WeatherElement(ContainerElement):
 #            self._pm = PmElement(parameter = parameter, parent = self, name = 'Pm')
 #            return self._pm
         else:
-            print ("WeatherElement: unsupported", parameterId)
+#            print ("WeatherElement: unsupported", parameterId)
             return super(WeatherElement, self).createChildForParameter(parameter)
 

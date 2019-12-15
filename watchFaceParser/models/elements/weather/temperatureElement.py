@@ -30,19 +30,19 @@ class TemperatureElement(NumberElement):
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
         if parameterId == 1:
-            print ("TemperatureElement: (Temperature->Current)", parameterId)
+            #print ("TemperatureElement: (Temperature->Current)", parameterId)
             from watchFaceParser.models.elements.common.numberElement import NumberElement
             self._temperature = NumberElement(parameter = parameter, parent = self, name = 'Temperature')
-            print ("DEBUG",self._temperature)
+            #print ("DEBUG",self._temperature)
             return self._temperature
         elif parameterId == 2:
-            print ("TemperatureElement: (Temperature->Today)", parameterId)
+            #print ("TemperatureElement: (Temperature->Today)", parameterId)
             pass
         elif parameterId == 3:
-            print ("TemperatureElement: (Temperature->Symbols)", parameterId)
+            #print ("TemperatureElement: (Temperature->Symbols)", parameterId)
             from watchFaceParser.models.elements.weather.symbolsElement import SymbolsElement
             self._symbols = SymbolsElement(parameter = parameter, parent = self, name = 'Symbols')
-            print ("DEBUG",self._symbols)
+            #print ("DEBUG",self._symbols)
             return self._symbols
         else:
             return super(TemperatureElement, self).createChildForParameter(parameter)

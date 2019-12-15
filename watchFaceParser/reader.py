@@ -47,7 +47,7 @@ class Reader:
 
         result = []
         for parameterDescriptor in parametersDescriptors:
-            print ("parameterDescriptor",parameterDescriptor.getId())
+            #print ("parameterDescriptor",parameterDescriptor.getId())
             descriptorOffset = parameterDescriptor.getChildren()[0].getValue()
             descriptorLength = parameterDescriptor.getChildren()[1].getValue()
             logging.info(f"Reading descriptor for parameter {parameterDescriptor.getId()}")
@@ -57,7 +57,7 @@ class Reader:
             logging.info(f"Parsing descriptor for parameter {parameterDescriptor.getId()}...")
             result.append(Parameter(parameterDescriptor.getId(), Parameter.readList(descriptorStream)))
             descriptorStream.seek(0)
-            print ([ "%02x" % x for x in descriptorStream.read()])
+            #print ([ "%02x" % x for x in descriptorStream.read()])
 
         return result
 

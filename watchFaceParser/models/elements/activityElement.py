@@ -81,6 +81,6 @@ class ActivityElement(ContainerElement):
             self._goal2 = Goal2Element(parameter = parameter, parent = self, name = '?Goal2?')
             return self._goal2
         else:
-            print ("unsupported parameterid",parameterId)
+            #print ("unsupported parameterid",parameterId)
             return super(ActivityElement, self).createChildForParameter(parameter)
 

@@ -105,7 +105,7 @@ class ParametersConverter:
                 else:
                     logging.debug(f"{currentPath} '{propertyInfo['Name']}': Skipped because of empty2")
  #                   print ("propertyType",propertyType, propertyValue )			
-                    sys.exit(1)
+ #                   sys.exit(1)
 
         return result
 

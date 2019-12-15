@@ -13,7 +13,7 @@ class YearElement(ContainerElement):
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
-        print ("YEARELEMENT:",parameterId)
+        #print ("YEARELEMENT:",parameterId)
         if parameterId == 1:
             from watchFaceParser.models.elements.date.year.oneLineYearElement import OneLineYearElement
             self._oneLine = OneLineYearElement(parameter = parameter, parent = self, name = 'OneLineYearElement')

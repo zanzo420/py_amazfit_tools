@@ -4,7 +4,7 @@ from watchFaceParser.models.elements.common.imageSetElement import ImageSetEleme
 
 class ExtendedWeatherElement(ImageSetElement):
     def __init__(self, parameter, parent, name = None):
-        print("init weather")
+        #print("init weather")
         self._images = None
         super(ExtendedWeatherElement, self).__init__(parameter = parameter, parent = parent, name = name)
 
@@ -19,14 +19,14 @@ class ExtendedWeatherElement(ImageSetElement):
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
-        print ("ExtendedWeatherElement:",parameterId)
+#        print ("ExtendedWeatherElement:",parameterId)
         if parameterId == 1:
-            print ("ExtendedWeatherElement(1=images?!)",parameterId) # images!?!?
+#            print ("ExtendedWeatherElement(1=images?!)",parameterId) # images!?!?
             from watchFaceParser.models.elements.weather.imagesElement import ImagesElement
             self._images = ImagesElement(parameter = parameter, parent = self, name = 'Images')
             return self._images	
         elif parameterId == 2:
-            print ("ExtendedWeatherElement(2=NoWeatherImageIndex?!)",parameterId) # NoWeatherImageIndex!?!?
+ #           print ("ExtendedWeatherElement(2=NoWeatherImageIndex?!)",parameterId) # NoWeatherImageIndex!?!?
             pass
 #            from watchFaceParser.models.elements.basic.valueElement import ValueElement
 #            self._suffixImageIndex = parameter.getValue()

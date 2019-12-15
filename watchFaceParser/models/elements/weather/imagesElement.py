@@ -9,5 +9,5 @@ class ImagesElement(ImageSetElement):
 
     def draw3(self, drawer, resources, state):
         assert(type(resources) == list)
-        print("wether ImageElement draw",state)
+#        print("wether ImageElement draw",state)
         super(ImagesElement, self).draw3(drawer, resources, state)
