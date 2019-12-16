@@ -4,6 +4,7 @@ from watchFaceParser.elements.basicElements.number import Number
 from watchFaceParser.elements.basicElements.image import Image
 from watchFaceParser.elements.basicElements.circleScale import CircleScale
 from watchFaceParser.elements.basicElements.unknownType import UnknownType
+from watchFaceParser.elements.basicElements.iconSet import IconSet
 
 class Activity:
     definitions = {
@@ -16,9 +17,9 @@ class Activity:
         8: { 'Name': 'CaloriesIcon', 'Type': Image}, #gts - Chiba petals_60247
         9: { 'Name': 'CircleRange', 'Type': Image}, # verge
         11: { 'Name': 'Goal2', 'Type': CircleScale}, # gts circle.bin
-        12: { 'Name': 'Unknown12', 'Type': 'long'}, # gts
+        12: { 'Name': 'ColouredSquares', 'Type': IconSet}, # gts - Classic number_101759
         13: { 'Name': 'NoDataImageIndex', 'Type': 'long'}, # verge
-        15: { 'Name': 'Unknown15', 'Type': 'long'}, # gts
+        15: { 'Name': 'CaloriesTextualIcon', 'Type': 'long'}, # gts - Classic number_101759
         17: { 'Name': 'Unknown17', 'Type': UnknownType}, # gts circle.bin
     }
 
