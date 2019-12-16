@@ -114,6 +114,7 @@ class ParametersConverter:
         assert(type(descriptor) == type([]))
         assert(type(path) == type(""))
         properties = ElementsHelper.sortedProperties(paramType)
+        currentType = paramType
 
         for parameter in descriptor:
             parameterId = parameter.getId()
