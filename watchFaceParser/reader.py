@@ -50,6 +50,7 @@ class Reader:
             #print ("parameterDescriptor",parameterDescriptor.getId())
             descriptorOffset = parameterDescriptor.getChildren()[0].getValue()
             descriptorLength = parameterDescriptor.getChildren()[1].getValue()
+            #print ("parameterDescriptor",parameterDescriptor.getId(),"%02x"%descriptorOffset,descriptorLength)
             logging.info(f"Reading descriptor for parameter {parameterDescriptor.getId()}")
             logging.info(f"Descriptor offset: {descriptorOffset}, Descriptor length: {descriptorLength}")
             parametersStream.seek(descriptorOffset)
