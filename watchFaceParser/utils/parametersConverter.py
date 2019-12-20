@@ -74,6 +74,12 @@ class ParametersConverter:
             #            result.append(Parameter(_id, innerParameters))
             #        else:
             #            logging.debug(f"{currentPath} '{propertyInfo['Name']}': Skipped because of empty(loop)")
+            elif propertyType == '':
+                print ("QUQAUQ")
+                value = None
+                logging.debug(f"{currentPath} '{propertyInfo['Name']}': {value}")
+                result.append(Parameter(_id, value))
+
             else:
 
 #                logging.debug ("childIsList "+str(childIsList)+" "+str(propertyType))
@@ -164,7 +170,6 @@ class ParametersConverter:
                 propertySubType = propertyInfo['SubType']
 
             propertyInfoName = propertyInfo['Name']
-
             if propertyType == 'long' or propertyType == 'long?' or propertyType == TextAlignment  or propertyType == Color or propertyType == 'bool':
                 if propertyType == TextAlignment:
                     setattr(result, propertyInfoName, TextAlignment(parameter.getValue()))
@@ -176,6 +181,10 @@ class ParametersConverter:
                     setattr(result, propertyInfoName, ulong2long(parameter.getValue()))
                 else:
                     setattr(result, propertyInfoName, ulong2long(parameter.getValue() or None))
+            elif propertyType == '':
+                print ("propertyType",propertyType)
+                print ("QUAUAUAUAUAUAUAU")
+                setattr(result, propertyInfoName, '')
             elif propertyType == '[]':
                 assert(False) # not tested yet
             else:		

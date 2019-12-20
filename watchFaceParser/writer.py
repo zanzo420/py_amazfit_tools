@@ -13,10 +13,15 @@ class Writer:
         encodedParameters = {}
         for parameter in descriptor:
             logging.debug(f"Parameter: {parameter.getId()}")
+            print(f"Parameter: {parameter.getId()}")
             memoryStream = io.BytesIO()
             for child in parameter.getChildren():
                 child.write(memoryStream)
+#                print(".",end="")
+            print("")
             encodedParameters[parameter.getId()] = memoryStream
+            #print ([ "%02x" % x for x in memoryStream.getvalue()])
+
 
         logging.debug("Encoding offsets and lengths...")
         parametersPositions = []
@@ -24,16 +29,20 @@ class Writer:
         maxEncodedParametersLength = 0
         from watchFaceParser.models.parameter import Parameter
         for encodedParameterId in encodedParameters:
+            print ([ "%02x" % x for x in (encodedParameters[encodedParameterId].getbuffer())])
             encodedParameterLength = len(encodedParameters[encodedParameterId].getbuffer())
             maxEncodedParametersLength = max(maxEncodedParametersLength, encodedParameterLength)
+#            print ("OFFSET %04x"%offset)
             parametersPositions.append(Parameter(encodedParameterId, [ Parameter(1, offset), Parameter(2, encodedParameterLength) ]))
             offset += encodedParameterLength
+
 
         parametersPositions.insert(0, Parameter(1, [ Parameter(1, offset), Parameter(2, len(self._images)) ]))
 
         encodedParametersPositions = io.BytesIO()
         for parametersPosition in parametersPositions:
             parametersPosition.write(encodedParametersPositions)
+#            print ([ "%02x" % x for x in encodedParametersPositions.getbuffer()])
 
         logging.debug("Writing header...")
         from watchFaceParser.models.header import Header
@@ -46,7 +55,10 @@ class Writer:
 
         logging.debug("Writing parameters...")
         for encodedParameter in encodedParameters:
+            print ("parameterDescriptor",encodedParameter)
             stream = encodedParameters[encodedParameter]
+            stream.seek(0)
+            print ([ "%02x" % x for x in stream.read()])
             stream.seek(0, 0)
             self._stream.write(stream.read())
 

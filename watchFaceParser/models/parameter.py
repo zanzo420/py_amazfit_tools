@@ -23,10 +23,18 @@ class Parameter:
             self._id = _id
             self._value = ulong2long(value)
             self._children = None
+            self._unknown = False
         elif type(value) == list:
             self._id = _id
             self._value = None
             self._children = value
+            self._unknown = False
+        elif type(value) == type(None):
+            self._id = _id
+            self._value = None
+            self._children = None
+            self._unknown = True
+#            print ("SONOQUI")
         else:
             raise Exception(f'invalid type for parameter {value}:{type(value)}')
 
@@ -45,6 +53,8 @@ class Parameter:
     def hasChildren(self):
         return self._children and len(self._children) > 0
 
+    def hasUnknown(self):
+        return self._unknown
 
     @staticmethod
     def writeByte(stream, v):
@@ -55,11 +65,16 @@ class Parameter:
         assert(type(traceOffset) == int)
         size = 0
         flags = ParameterFlags.hasChildren if self.hasChildren() else 0
+        flags |= (ParameterFlags.Unknown | ParameterFlags.Unknown2 | ParameterFlags.hasChildren) if self.hasUnknown() else 0
         rawId = 0xff & ((self.getId() << 3) + flags)
         Parameter.writeByte(stream, rawId)
 
         size += 1
-        if self.hasChildren():
+        if self.hasUnknown():
+    #        print ("EDDI %02x %x %x"% (rawId,flags,(ParameterFlags.Unknown | ParameterFlags.Unknown2| ParameterFlags.hasChildren)))
+            logging.debug(("\t" * traceOffset) + f"{size} bytes")
+            return size -1
+        elif self.hasChildren():
             logging.debug(("\t" * traceOffset) + f"{self.getId()} ({rawId:02X}):")
             size += self.writeList(stream, traceOffset + 1)
             logging.debug(("\t" * traceOffset) + f"{size} bytes")
@@ -121,6 +136,7 @@ class Parameter:
     def readFrom(fileStream, traceOffset = 0):
         rawId = Parameter.readByte(fileStream, traceOffset)
         _id = (rawId & 0xf8) >> 3
+ #       print ("%03x" % rawId, rawId & 0x07)
         flags = ParameterFlags(rawId & 0x07)
 
         if _id == 0:

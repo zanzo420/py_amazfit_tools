@@ -14,8 +14,8 @@ class WatchFace:
     definitions = {
         2: { 'Name': 'Background', 'Type': Background},
         3: { 'Name': 'Time', 'Type': Time},
-        5: { 'Name': 'Date', 'Type': Date},
         4: { 'Name': 'Activity', 'Type': Activity},
+        5: { 'Name': 'Date', 'Type': Date},
         6: { 'Name': 'Weather', 'Type': Weather},
         7: { 'Name': 'StepsProgress', 'Type': StepsProgress},
         8: { 'Name': 'Status', 'Type': Status},
