@@ -13,12 +13,12 @@ class Writer:
         encodedParameters = {}
         for parameter in descriptor:
             logging.debug(f"Parameter: {parameter.getId()}")
-            print(f"Parameter: {parameter.getId()}")
+            #print(f"Parameter: {parameter.getId()}")
             memoryStream = io.BytesIO()
             for child in parameter.getChildren():
                 child.write(memoryStream)
 #                print(".",end="")
-            print("")
+            #print("")
             encodedParameters[parameter.getId()] = memoryStream
             #print ([ "%02x" % x for x in memoryStream.getvalue()])
 
@@ -29,7 +29,7 @@ class Writer:
         maxEncodedParametersLength = 0
         from watchFaceParser.models.parameter import Parameter
         for encodedParameterId in encodedParameters:
-            print ([ "%02x" % x for x in (encodedParameters[encodedParameterId].getbuffer())])
+            #print ([ "%02x" % x for x in (encodedParameters[encodedParameterId].getbuffer())])
             encodedParameterLength = len(encodedParameters[encodedParameterId].getbuffer())
             maxEncodedParametersLength = max(maxEncodedParametersLength, encodedParameterLength)
 #            print ("OFFSET %04x"%offset)

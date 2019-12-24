@@ -2,6 +2,7 @@ import logging
 import os.path
 
 from watchFaceParser.utils.elementsHelper import ElementsHelper
+from watchFaceParser.models.parameterFlags import ParameterFlags
 from watchFaceParser.models.textAlignment import TextAlignment
 from watchFaceParser.models.color import Color
 from watchFaceParser.models.parameter import Parameter
@@ -50,7 +51,7 @@ class ParametersConverter:
             if propertyValue is None:
                 continue
 
-            if propertyType == 'long' or propertyType == 'long?' or propertyType == TextAlignment  or propertyType == Color or propertyType == 'bool':
+            if propertyType == 'long' or propertyType == 'long?' or propertyType == TextAlignment or propertyType == Color or propertyType == 'bool':
                 value = propertyValue
                 if propertyType == 'bool' or type(propertyValue) == bool:
                     value = 1 if propertyValue else 0
@@ -74,11 +75,10 @@ class ParametersConverter:
             #            result.append(Parameter(_id, innerParameters))
             #        else:
             #            logging.debug(f"{currentPath} '{propertyInfo['Name']}': Skipped because of empty(loop)")
-            elif propertyType == '':
-                print ("QUQAUQ")
-                value = None
-                logging.debug(f"{currentPath} '{propertyInfo['Name']}': {value}")
-                result.append(Parameter(_id, value))
+            elif propertyType == ParameterFlags:
+                flags = ParameterFlags.fromJSON(propertyValue)
+                logging.debug(f"{currentPath} '{propertyInfo['Name']}': {flags}")
+                result.append(Parameter(_id, None, flags = flags))
 
             else:
 
@@ -165,14 +165,13 @@ class ParametersConverter:
                 propertyType = propertyInfo['Type'][0]
             else:
                 propertyType = propertyInfo['Type']
-			
-            if "SubType" in propertyInfo:
-                propertySubType = propertyInfo['SubType']
 
             propertyInfoName = propertyInfo['Name']
-            if propertyType == 'long' or propertyType == 'long?' or propertyType == TextAlignment  or propertyType == Color or propertyType == 'bool':
+            if propertyType == 'long' or propertyType == 'long?' or propertyType == TextAlignment or propertyType == ParameterFlags or propertyType == Color or propertyType == 'bool':
                 if propertyType == TextAlignment:
                     setattr(result, propertyInfoName, TextAlignment(parameter.getValue()))
+                elif propertyType == ParameterFlags:
+                    setattr(result, propertyInfoName, ParameterFlags(parameter.getValue()))
                 elif propertyType == Color:
                     setattr(result, propertyInfoName, Color(parameter.getValue()))
                 elif propertyType == 'bool':
@@ -181,10 +180,6 @@ class ParametersConverter:
                     setattr(result, propertyInfoName, ulong2long(parameter.getValue()))
                 else:
                     setattr(result, propertyInfoName, ulong2long(parameter.getValue() or None))
-            elif propertyType == '':
-                print ("propertyType",propertyType)
-                print ("QUAUAUAUAUAUAUAU")
-                setattr(result, propertyInfoName, '')
             elif propertyType == '[]':
                 assert(False) # not tested yet
             else:		

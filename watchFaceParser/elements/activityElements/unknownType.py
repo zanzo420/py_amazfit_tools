@@ -1,11 +1,7 @@
-﻿from watchFaceParser.models.textAlignment import TextAlignment
+﻿from watchFaceParser.models.parameterFlags import ParameterFlags
 
 class UnknownType:
     definitions = {
-        1: { 'Name': 'TopLeftX', 'Type': 'long'},
-        2: { 'Name': 'TopLeftY', 'Type': 'long'},
-        3: { 'Name': 'BottomRightX', 'Type': ''},
-        4: { 'Name': 'BottomRightY', 'Type': 'long'},
-        5: { 'Name': 'Alignment', 'Type': TextAlignment},
-        6: { 'Name': 'Spacing', 'Type': 'long'},
+        3: { 'Name': 'EnableThirdGoal', 'Type': ParameterFlags},
+        4: { 'Name': 'EnableEnhanchedGoal', 'Type': ParameterFlags},
     }
