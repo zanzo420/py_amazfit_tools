@@ -11,9 +11,7 @@ class WeatherElement(ContainerElement):
 
     def draw3(self, drawer, images, state):
         assert(type(images) == list)
-#        if self.getImages():
-#            self.getImages().draw3(drawer, images, 1)
-#
+
         if self.getIcon():
 		    #render weather icon
             self.getIcon().getImages().draw3(drawer, images, state.getWeather())
