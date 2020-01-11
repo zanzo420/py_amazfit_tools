@@ -21,5 +21,6 @@ class Activity:
         15: { 'Name': 'CaloriesTextualIcon', 'Type': 'long'}, # gts - Classic number_101759
         17: { 'Name': 'Unknown17', 'Type': UnknownType}, # gts circle.bin
         1: { 'Name': 'KcalProgress', 'Type': CircleScale}, # should be kcal on gts
+		18: { 'Name': 'Unknown18', 'Type': FormattedNumber}, # gts fluorescence
     }
 

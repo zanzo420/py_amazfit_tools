@@ -6,11 +6,13 @@ class ParameterFlags:
 
     ModeCircle = Unknown
     ModeColorfulLife = Unknown | hasChildren | Unknown2
+    ModeFluorescence = hasChildren
 
     Converter = {
         Default : "Default",
         ModeColorfulLife : "ModeColorfulLife",
         ModeCircle : "ModeCircle",
+		ModeFluorescence: "ModeFluorescence",
     }
 
     def __init__(self, flag):

@@ -137,12 +137,14 @@ class Parameter:
         _id = (rawId & 0xf8) >> 3
  #       print ("%03x" % rawId, rawId & 0x07)
         flags = ParameterFlags(rawId & 0x07)
+        #logging.info("FLAGS %x" % (rawId & 0x07))
 
         if _id == 0:
             raise IndexError("Parameter with zero Id is invalid.") #ArgumentException
 
         value = Parameter.readValue(fileStream, traceOffset)
-        if flags.hasFlag(ParameterFlags.Unknown) or flags.hasFlag(ParameterFlags.Unknown2):
+        #logging.info("DEBUG %x" % value)
+        if value == 0: #flags.hasFlag(ParameterFlags.Unknown) or flags.hasFlag(ParameterFlags.Unknown2):
             value = flags.getValue()	
         elif flags.hasFlag(ParameterFlags.hasChildren):
             logging.info(Parameter.traceWithOffset(f"{_id} ({rawId:2X}): {value} bytes", traceOffset))
