@@ -5,8 +5,8 @@ from watchFaceParser.models.elements.basic.containerElement import ContainerElem
 
 class ActivityElement(ContainerElement):
     def __init__(self, parameter, parent = None, name = None):
-        self._stepsGoal = None
-        self._goal2 = None
+        self._kcalProgress = None
+        self._pulseMeter = None
         self._steps = None
         self._distance = None
         self._pulse = None
@@ -16,11 +16,11 @@ class ActivityElement(ContainerElement):
         super(ActivityElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
 
-    def getStepsGoal(self):
-        return self._stepsGoal
+    def getKcalProgress(self):
+        return self._kcalProgress
 
-    def getGoal2(self):
-        return self._goal2
+    def getPulseMeter(self):
+        return self._pulseMeter
 
     def getSteps(self):
         return self._steps
@@ -49,9 +49,9 @@ class ActivityElement(ContainerElement):
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
         if parameterId == 1:
-            from watchFaceParser.models.elements.activity.stepsGoalElement import StepsGoalElement
-            self._stepsGoal = StepsGoalElement(parameter = parameter, parent = self, name = '?StepsGoal?')
-            return self._stepsGoal
+            from watchFaceParser.models.elements.activity.kcalProgressElement import KcalProgressElement
+            self._kcalProgress = KcalProgressElement(parameter = parameter, parent = self, name = '?KcalProgress?')
+            return self._kcalProgress
         elif parameterId == 2:
             from watchFaceParser.models.elements.activity.caloriesElement import CaloriesElement
             self._calories = CaloriesElement(parameter = parameter, parent = self, name = '?Calories?')
@@ -77,9 +77,9 @@ class ActivityElement(ContainerElement):
             self._circleRange = ImageElement(parameter = parameter, parent = self, name = '?CircleRange?')
             return self._circleRange
         elif parameterId == 11:
-            from watchFaceParser.models.elements.activity.goal2Element import Goal2Element
-            self._goal2 = Goal2Element(parameter = parameter, parent = self, name = '?Goal2?')
-            return self._goal2
+            from watchFaceParser.models.elements.activity.pulseMeterElement import PulseMeterElement
+            self._pulseMeter = PulseMeterElement(parameter = parameter, parent = self, name = '?PulseMeter?')
+            return self._pulseMeter
         else:
             #print ("unsupported parameterid",parameterId)
             return super(ActivityElement, self).createChildForParameter(parameter)
