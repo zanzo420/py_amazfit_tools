@@ -15,11 +15,11 @@ class Activity:
         7: { 'Name': 'StarImage', 'Type': Image}, #gtr
         8: { 'Name': 'CaloriesIcon', 'Type': Image}, #gts - Chiba petals_60247
         9: { 'Name': 'CircleRange', 'Type': Image}, # verge
-        11: { 'Name': 'Goal2', 'Type': CircleScale}, # gts circle.bin
+        11: { 'Name': 'PulseMeter', 'Type': CircleScale}, # gts circle.bin
         12: { 'Name': 'ColouredSquares', 'Type': IconSet}, # gts - Classic number_101759
         13: { 'Name': 'NoDataImageIndex', 'Type': 'long'}, # verge
         15: { 'Name': 'CaloriesTextualIcon', 'Type': 'long'}, # gts - Classic number_101759
         17: { 'Name': 'Unknown17', 'Type': UnknownType}, # gts circle.bin
-        1: { 'Name': 'StepsGoal', 'Type': CircleScale}, # should be kcal on gts
+        1: { 'Name': 'KcalProgress', 'Type': CircleScale}, # should be kcal on gts
     }
 
