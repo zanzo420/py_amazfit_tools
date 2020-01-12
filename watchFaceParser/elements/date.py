@@ -11,5 +11,6 @@ class Date:
         3: { 'Name': 'Unknown3', 'Type': DateUnknown3},
         4: { 'Name': 'Unknown4', 'Type': Coordinates},
         5: { 'Name': 'Year', 'Type': Year}, #gts
+        6: { 'Name': 'Unknown5', 'Type': 'long'}, #gts - Black Origin
     }
 

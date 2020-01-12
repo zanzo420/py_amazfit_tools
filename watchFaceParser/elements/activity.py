@@ -4,6 +4,7 @@ from watchFaceParser.elements.basicElements.number import Number
 from watchFaceParser.elements.basicElements.image import Image
 from watchFaceParser.elements.basicElements.circleScale import CircleScale
 from watchFaceParser.elements.activityElements.unknownType import UnknownType
+from watchFaceParser.elements.activityElements.unknownType18 import UnknownType18
 from watchFaceParser.elements.basicElements.iconSet import IconSet
 
 class Activity:
@@ -18,9 +19,10 @@ class Activity:
         11: { 'Name': 'PulseMeter', 'Type': CircleScale}, # gts circle.bin
         12: { 'Name': 'ColouredSquares', 'Type': IconSet}, # gts - Classic number_101759
         13: { 'Name': 'NoDataImageIndex', 'Type': 'long'}, # verge
+        14: { 'Name': 'Unknown14', 'Type': 'long'}, # gts - Digital watch
         15: { 'Name': 'CaloriesTextualIcon', 'Type': 'long'}, # gts - Classic number_101759
         17: { 'Name': 'Unknown17', 'Type': UnknownType}, # gts circle.bin
         1: { 'Name': 'KcalProgress', 'Type': CircleScale}, # should be kcal on gts
-		18: { 'Name': 'Unknown18', 'Type': FormattedNumber}, # gts fluorescence
+		18: { 'Name': 'Unknown18', 'Type': UnknownType18}, # gts fluorescence
     }
 
