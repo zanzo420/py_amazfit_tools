@@ -52,10 +52,10 @@ class ActivityElement(ContainerElement):
             from watchFaceParser.models.elements.activity.kcalProgressElement import KcalProgressElement
             self._kcalProgress = KcalProgressElement(parameter = parameter, parent = self, name = '?KcalProgress?')
             return self._kcalProgress
-        #elif parameterId == 2:
-        #    from watchFaceParser.models.elements.activity.caloriesElement import CaloriesElement
-        #    self._calories = CaloriesElement(parameter = parameter, parent = self, name = '?Calories?')
-        #    return self._calories
+        elif parameterId == 2:
+            from watchFaceParser.models.elements.activity.caloriesElement import CaloriesElement
+            self._calories = CaloriesElement(parameter = parameter, parent = self, name = '?Calories?')
+            return self._calories
         elif parameterId == 3:
             from watchFaceParser.models.elements.activity.pulseElement import PulseElement
             self._pulse = PulseElement(parameter = parameter, parent = self, name = '?Pulse?')
