@@ -66,7 +66,8 @@ class Parameter:
         flags |= self.hasFlags() if self.hasFlags() else 0
 		
         rawId = 0xff & ((self.getId() << 3) + flags)
-        Parameter.writeByte(stream, rawId)
+        #Parameter.writeByte(stream, rawId)
+        self.writeValue(stream, rawId, traceOffset)
 
         size += 1
         if self.hasFlags():
@@ -133,7 +134,8 @@ class Parameter:
 
     @staticmethod
     def readFrom(fileStream, traceOffset = 0):
-        rawId = Parameter.readByte(fileStream, traceOffset)
+        #rawId = Parameter.readByte(fileStream, traceOffset)
+        rawId = Parameter.readValue(fileStream, traceOffset)
         _id = (rawId & 0xf8) >> 3
  #       print ("%03x" % rawId, rawId & 0x07)
         flags = ParameterFlags(rawId & 0x07)
@@ -143,10 +145,17 @@ class Parameter:
             raise IndexError("Parameter with zero Id is invalid.") #ArgumentException
 
         value = Parameter.readValue(fileStream, traceOffset)
-        #logging.info("DEBUG %x" % value)
-        if value == 0: #flags.hasFlag(ParameterFlags.Unknown) or flags.hasFlag(ParameterFlags.Unknown2):
+        logging.info("DEBUG ID %d FLAGS %x VALUE %x" % (_id, rawId & 0x07, value))
+#        if value == 1 and flags.hasFlag(ParameterFlags.hasChildren):
+#            value = Parameter.readValue(fileStream, traceOffset)
+##            logging.info("DEBUG                 %02x" % Parameter.readByte(fileStream, traceOffset))
+#            pass
+        if flags.hasFlag(ParameterFlags.Unknown) or flags.hasFlag(ParameterFlags.Unknown2):
             value = flags.getValue()	
         elif flags.hasFlag(ParameterFlags.hasChildren):
+            if value == 0:
+                logging.info("DEBUG                 %02x" % Parameter.readByte(fileStream, traceOffset))
+                logging.info("DEBUG                 %02x" % Parameter.readByte(fileStream, traceOffset))
             logging.info(Parameter.traceWithOffset(f"{_id} ({rawId:2X}): {value} bytes", traceOffset))
             buffer = fileStream.read(value)
             stream = io.BytesIO(buffer)

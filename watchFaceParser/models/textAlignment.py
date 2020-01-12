@@ -47,6 +47,8 @@ class TextAlignment:
         return (self._flag & flag) != 0
 
     def toJSON(self):
+        if self._flag == None:
+            self._flag = 0
         return TextAlignment.Converter[self._flag]
 
     @staticmethod
