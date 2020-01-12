@@ -3,7 +3,6 @@ from watchFaceParser.elements.activityElements.distance import Distance
 from watchFaceParser.elements.basicElements.number import Number
 from watchFaceParser.elements.basicElements.image import Image
 from watchFaceParser.elements.basicElements.circleScale import CircleScale
-from watchFaceParser.elements.activityElements.unknownType import UnknownType
 from watchFaceParser.elements.activityElements.unknownType17 import UnknownType17
 from watchFaceParser.elements.activityElements.unknownType18 import UnknownType18
 from watchFaceParser.elements.basicElements.iconSet import IconSet
@@ -24,6 +23,6 @@ class Activity:
         14: { 'Name': 'Unknown14', 'Type': 'long'}, # gts - Digital watch
         15: { 'Name': 'CaloriesTextualIcon', 'Type': 'long'}, # gts - Classic number_101759
         17: { 'Name': 'Unknown17', 'Type': UnknownType17}, # gts circle.bin
-		18: { 'Name': 'Unknown18', 'Type': UnknownType18}, # gts fluorescence
+        18: { 'Name': 'Unknown18', 'Type': UnknownType18}, # gts fluorescence
     }
 
