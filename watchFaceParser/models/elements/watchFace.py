@@ -57,12 +57,6 @@ class WatchFace(ContainerElement):
     def getAnalogDial(self):
         return self._analogDial
 
-
-    #def getWeather(self):
-    #    print ("GETWEATHER")
-    #    return self._weather
-
-
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
         if parameterId == 2:

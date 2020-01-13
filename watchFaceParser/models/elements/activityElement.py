@@ -13,6 +13,7 @@ class ActivityElement(ContainerElement):
         self._calories = None
         self._starImage = None
         self._circleRange = None
+        self._unknown17 = None
         super(ActivityElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
 
@@ -80,7 +81,10 @@ class ActivityElement(ContainerElement):
             from watchFaceParser.models.elements.activity.pulseMeterElement import PulseMeterElement
             self._pulseMeter = PulseMeterElement(parameter = parameter, parent = self, name = '?PulseMeter?')
             return self._pulseMeter
+        elif parameterId == 17:
+            from watchFaceParser.models.elements.activity.unknown17Element import Unknown17Element
+            self._unknown17 = Unknown17Element(parameter = parameter, parent = self, name = '?Unknown17?')
+            return self._unknown17
         else:
-            #print ("unsupported parameterid",parameterId)
             return super(ActivityElement, self).createChildForParameter(parameter)
 
