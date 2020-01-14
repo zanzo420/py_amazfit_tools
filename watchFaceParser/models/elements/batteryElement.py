@@ -49,8 +49,8 @@ class BatteryElement(ContainerElement):
             return self._unknown4			
             pass
         elif parameterId == 6: #percent
-            from watchFaceParser.models.elements.battery.percentElement import PercentElement
-            self._percent = PercentElement(parameter = parameter, parent = self, name = 'Percent')
+            from watchFaceParser.models.elements.battery.batteryGaugeElement import BatteryGaugeElement
+            self._percent = BatteryGaugeElement(parameter = parameter, parent = self, name = '?_images?')
             return self._percent
         elif parameterId == 7: #scale
             from watchFaceParser.models.elements.battery.circularBatteryElement import CircularBatteryElement
