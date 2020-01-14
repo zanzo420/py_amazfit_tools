@@ -8,6 +8,7 @@ class StepsProgressElement(ContainerElement):
         self._images1 = None
         self._images2 = None
         self._images4 = None
+        self._stepsLinear = None
         super(StepsProgressElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
 
@@ -39,11 +40,10 @@ class StepsProgressElement(ContainerElement):
             from watchFaceParser.models.elements.goalProgress.stepGaugeElement import StepGaugeElement # temp.
             self._images1 = StepGaugeElement(parameter = parameter, parent = self, name = '?_images?')
             return self._images1
-#        elif parameterId == 2:
-#
-#            from watchFaceParser.models.elements.goalProgress.stepGaugeElement import StepGaugeElement # temp.
-#            self._images2 = StepGaugeElement(parameter = parameter, parent = self, name = '?_images?')
-#            return self._images2
+        elif parameterId == 2:
+            from watchFaceParser.models.elements.goalProgress.stepsLinearElement import StepsLinearElement
+            self._stepsLinear = StepsLinearElement(parameter = parameter, parent = self, name = '?stepsLinear?')
+            return self._stepsLinear
         elif parameterId == 4:
             from watchFaceParser.models.elements.goalProgress.stepGaugeElement import StepGaugeElement # temp.
             self._images4 = StepGaugeElement(parameter = parameter, parent = self, name = '?_images?')
