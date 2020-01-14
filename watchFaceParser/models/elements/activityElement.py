@@ -14,6 +14,7 @@ class ActivityElement(ContainerElement):
         self._starImage = None
         self._circleRange = None
         self._unknown17 = None
+        self._stepsProgress = None
         super(ActivityElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
 
@@ -77,6 +78,10 @@ class ActivityElement(ContainerElement):
             from watchFaceParser.models.elements.common.imageElement import ImageElement
             self._circleRange = ImageElement(parameter = parameter, parent = self, name = '?CircleRange?')
             return self._circleRange
+        elif parameterId == 12:
+            from watchFaceParser.models.elements.activity.stepsProgressElement import StepsProgressElement
+            self._stepsProgress = StepsProgressElement(parameter = parameter, parent = self, name = '?stepsProgress?')
+            return self._stepsProgress
         elif parameterId == 11:
             from watchFaceParser.models.elements.activity.pulseMeterElement import PulseMeterElement
             self._pulseMeter = PulseMeterElement(parameter = parameter, parent = self, name = '?PulseMeter?')
