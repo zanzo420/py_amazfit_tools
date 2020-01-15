@@ -71,7 +71,7 @@ class CircularProgressElement(CoordinatesElement):
     
             d.arc(rect, start = -90 + self.getStartAngle(), end = -90 + self.getStartAngle() + sectorAngle, fill = self.getColor(), width = self.getWidth())
 
-            drawer.paste(temp, (self.getX() - 1 - self.getRadiusX() - int(self._width  / 2), self.getY() - 1 - self.getRadiusY() - int(self._width  / 2)), mask)
+            drawer.paste(temp, (self.getX() - self.getRadiusX() - int(self._width  / 2), self.getY() - self.getRadiusY() - int(self._width  / 2)), mask)
 
         else:
 

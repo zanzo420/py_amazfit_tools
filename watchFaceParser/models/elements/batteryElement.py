@@ -49,7 +49,6 @@ class BatteryElement(ContainerElement):
             from watchFaceParser.models.elements.analogDial.secondsClockHandElement import SecondsClockHandElement # must must be own. fix it!!
             self._unknown4 = SecondsClockHandElement(parameter = parameter, parent = self, name = 'Unknown4')
             return self._unknown4			
-            pass
         elif parameterId == 6: #percent
             from watchFaceParser.models.elements.battery.percentElement import PercentElement
             self._percent = PercentElement(parameter = parameter, parent = self, name = '?_images?')

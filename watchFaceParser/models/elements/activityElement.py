@@ -90,6 +90,10 @@ class ActivityElement(ContainerElement):
             from watchFaceParser.models.elements.activity.unknown17Element import Unknown17Element
             self._unknown17 = Unknown17Element(parameter = parameter, parent = self, name = '?Unknown17?')
             return self._unknown17
+        elif parameterId == 18:
+            from watchFaceParser.models.elements.activity.unknown18Element import Unknown18Element
+            self._unknown18 = Unknown18Element(parameter = parameter, parent = self, name = '?Unknown18?')
+            return self._unknown18
         else:
             return super(ActivityElement, self).createChildForParameter(parameter)
 
