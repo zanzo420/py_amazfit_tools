@@ -53,15 +53,36 @@ class CircularProgressElement(CoordinatesElement):
         if value > total:
             value = total
         sectorAngle = int(1.0 * (self.getEndAngle() - self.getStartAngle()) * value / total)
-        	
-        from PIL import ImageDraw
-        d = ImageDraw.Draw(drawer) # draw context
-        radius = self.getRadiusX() + int(self.getWidth() / 2) # patch for PIL arc
-		
-        rect = (int(self.getX() - radius), int(self.getY() - radius),
-            int(self.getX() + radius), int(self.getY() + radius))
 
-        d.arc(rect, start = -90 + self.getStartAngle(), end = -90 + self.getStartAngle() + sectorAngle, fill = self.getColor(), width = self.getWidth())
+        print ("_imageIndex",self._imageIndex)
+        if self._imageIndex:
+            temp = resources[self._imageIndex].getBitmap()
+            print (drawer,self.getColor())
+            from PIL import Image
+            #mask = Image.new('RGBA',temp.size,self.getColor())
+            mask = Image.new('RGBA',temp.size,(0,0,0,0))
+			
+            from PIL import ImageDraw
+            d = ImageDraw.Draw(mask) # draw context
+            radius = self.getRadiusX() + int(self.getWidth() / 2) # patch for PIL arc
+    		
+            rect = (0, 0,
+                int((radius  )*2) , int((radius )*2))
+    
+            d.arc(rect, start = -90 + self.getStartAngle(), end = -90 + self.getStartAngle() + sectorAngle, fill = self.getColor(), width = self.getWidth())
+
+            drawer.paste(temp, (self.getX() - 1 - self.getRadiusX() - int(self._width  / 2), self.getY() - 1 - self.getRadiusY() - int(self._width  / 2)), mask)
+
+        else:
+
+            from PIL import ImageDraw
+            d = ImageDraw.Draw(drawer) # draw context
+            radius = self.getRadiusX() + int(self.getWidth() / 2) # patch for PIL arc
+    		
+            rect = (int(self.getX() - radius), int(self.getY() - radius),
+                int(self.getX() + radius), int(self.getY() + radius))
+    
+            d.arc(rect, start = -90 + self.getStartAngle(), end = -90 + self.getStartAngle() + sectorAngle, fill = self.getColor(), width = self.getWidth())
 
 
     def createChildForParameter(self, parameter):
