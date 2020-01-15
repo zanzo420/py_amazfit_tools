@@ -176,7 +176,37 @@ class Parser:
         states = Parser.getPreviewStates(outputDirectory)
         logging.debug("Generating states done...")
         staticPreview = PreviewGenerator.createImage(parameters, images, WatchState())
-        logging.debug("Generating static preview gen done...")
+        
+        #https://stackoverflow.com/questions/7787375/python-imaging-library-pil-drawing-rounded-rectangle-with-gradient/7788322#7788322
+        from PIL import Image
+        def round_corner(radius):
+            """Draw a round corner"""
+            corner = Image.new('RGBA', (radius, radius), (0, 0, 0, 0))
+            draw = ImageDraw.Draw(corner)
+            draw.pieslice((0, 0, radius * 2, radius * 2), 180, 270, fill="blue")
+            return corner        
+        
+
+        def round_rectangle(size, radius, startFill, stopFill, runTopBottom = False):
+            rectangle = Image.new('RGBA', size)
+            origCorner = round_corner(radius)
+            # upper left
+            corner = origCorner
+            rectangle.paste(corner, (0, 0)        
+            
+            # lower right
+            corner = origCorner.rotate(180)
+            rectangle.paste(corner, (width - radius, height - radius))
+            
+            pper right
+            corner = origCorner.rotate(270)
+            rectangle.paste(corner, (width - radius, 0))
+			
+			
+        img = round_rectangle((200, 200), 70, (255,0,0), (0,255,0), True)
+        img.save("test.png", 'PNG')	
+
+		logging.debug("Generating static preview gen done...")
         staticPreview.save(os.path.join(outputDirectory, f"{baseName}_static.png"))
 
         #generate small preview image for Preview section.
