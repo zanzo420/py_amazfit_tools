@@ -178,7 +178,7 @@ class Parser:
         staticPreview = PreviewGenerator.createImage(parameters, images, WatchState())
         
         #https://stackoverflow.com/questions/7787375/python-imaging-library-pil-drawing-rounded-rectangle-with-gradient/7788322#7788322
-        from PIL import Image
+        from PIL import Image, ImageDraw
         def round_corner(radius):
             """Draw a round corner"""
             corner = Image.new('RGBA', (radius, radius), (0, 0, 0, 0))
@@ -188,25 +188,87 @@ class Parser:
         
 
         def round_rectangle(size, radius, startFill, stopFill, runTopBottom = False):
+            width, height = size
             rectangle = Image.new('RGBA', size)
             origCorner = round_corner(radius)
+			
             # upper left
             corner = origCorner
-            rectangle.paste(corner, (0, 0)        
+            rectangle.paste(corner, (0, 0))
+
+            # lower left
+            corner = origCorner.rotate(90)
+            rectangle.paste(corner, (0, height - radius))
             
             # lower right
             corner = origCorner.rotate(180)
             rectangle.paste(corner, (width - radius, height - radius))
             
-            pper right
+            # upper right
             corner = origCorner.rotate(270)
             rectangle.paste(corner, (width - radius, 0))
+            return rectangle
 			
-			
-        img = round_rectangle((200, 200), 70, (255,0,0), (0,255,0), True)
-        img.save("test.png", 'PNG')	
+        from PIL.ImageDraw import ImageDraw
+        
+        def rounded_rectangle(self: ImageDraw, xy, corner_radius, fill=None, outline=None):
+            upper_left_point = xy[0]
+            bottom_right_point = xy[1]
+            self.rectangle(
+                [
+                    (upper_left_point[0], upper_left_point[1] + corner_radius),
+                    (bottom_right_point[0], bottom_right_point[1] - corner_radius)
+                ],
+                fill=fill,
+                outline=outline
+            )
+            self.rectangle(
+                [
+                    (upper_left_point[0] + corner_radius, upper_left_point[1]),
+                    (bottom_right_point[0] - corner_radius, bottom_right_point[1])
+                ],
+                fill=fill,
+                outline=outline
+            )
+            self.pieslice([upper_left_point, (upper_left_point[0] + corner_radius * 2, upper_left_point[1] + corner_radius * 2)],
+                180,
+                270,
+                fill=fill,
+                outline=outline
+            )
+            self.pieslice([(bottom_right_point[0] - corner_radius * 2, bottom_right_point[1] - corner_radius * 2), bottom_right_point],
+                0,
+                90,
+                fill=fill,
+                outline=outline
+            )
+            self.pieslice([(upper_left_point[0], bottom_right_point[1] - corner_radius * 2), (upper_left_point[0] + corner_radius * 2, bottom_right_point[1])],
+                90,
+                180,
+                fill=fill,
+                outline=outline
+            )
+            self.pieslice([(bottom_right_point[0] - corner_radius * 2, upper_left_point[1]), (bottom_right_point[0], upper_left_point[1] + corner_radius * 2)],
+                270,
+                360,
+                fill=fill,
+                outline=outline
+            )
+        
+        
+        ImageDraw.rounded_rectangle = rounded_rectangle
+        size = (200, 320)
+        # An example: 
+        from PIL import Image, ImageDraw, ImageFont 
+        new_image = Image.new("RGBA", size, (255, 255, 255, 0)) 
+        d = ImageDraw.Draw(new_image) 
+        d.rounded_rectangle(xy, corner_radius)
+ 
+        #img = round_rectangle((200, 320), 40, (255,0,0), (0,255,0), True)
+        #img.save("test.png", 'PNG')	
+        new_image.save("test.png", 'PNG')	
 
-		logging.debug("Generating static preview gen done...")
+        logging.debug("Generating static preview gen done...")
         staticPreview.save(os.path.join(outputDirectory, f"{baseName}_static.png"))
 
         #generate small preview image for Preview section.

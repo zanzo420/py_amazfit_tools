@@ -41,8 +41,8 @@ class DateElement(ContainerElement):
         elif parameterId == 6:
             from watchFaceParser.models.elements.date.weekDayProgressElement import WeekDayProgressElement
             self._weekDayProgress = WeekDayProgressElement(parameter = parameter, parent = self, name = 'WeekDayProgress')
-            import jsonpickle
-            import json
+            #import jsonpickle
+            #import json
             #print ("self._weekDayProgress",json.dumps(json.loads(jsonpickle.encode(self._weekDayProgress.__dict__)), indent=4))
             #print ("DATELELEMENT6")
             return self._weekDayProgress
