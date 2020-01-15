@@ -36,12 +36,12 @@ class BatteryLinearElement(IconSetElement):
     def createChildForParameter(self, parameter):
         if parameter.getId() == 1:
             self._imageIndex = parameter.getValue()
-            print ("ARRAY",self._imageIndex)
+            #print ("ARRAY",self._imageIndex)
             from watchFaceParser.models.elements.basic.valueElement import ValueElement
             return ValueElement(parameter, self, '?ImageIndex?')
-            print ( parameter.getValue(),parameter.getChildren())
+            #print ( parameter.getValue(),parameter.getChildren())
         elif parameter.getId() == 2:
-            print ( [ c.getValue() for c in  parameter.getChildren()])
+            #print ( [ c.getValue() for c in  parameter.getChildren()])
             from watchFaceParser.models.elements.common.coordinatesElement import CoordinatesElement
             #print ( parameter.getValue(),parameter.getChildren())
             #print (self.getName(),[c.getValue() for c in parameter.getChildren()])

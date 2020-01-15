@@ -44,7 +44,7 @@ class DateElement(ContainerElement):
             import jsonpickle
             import json
             #print ("self._weekDayProgress",json.dumps(json.loads(jsonpickle.encode(self._weekDayProgress.__dict__)), indent=4))
-            print ("DATELELEMENT6")
+            #print ("DATELELEMENT6")
             return self._weekDayProgress
         else:
             return super(DateElement, self).createChildForParameter(parameter)

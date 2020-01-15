@@ -33,19 +33,19 @@ class StepsLinearElement(IconSetElement):
         val = int(len(self._ar) * state.getSteps() / state.getGoal()) 
         if val >= len(self._ar):
             val = len(self._ar) -1
-        print ("DEBUGGGGGG",state.getGoal() , len(self._ar) , state.getSteps(), "TOT:", val )
+        #print ("DEBUGGGGGG",state.getGoal() , len(self._ar) , state.getSteps(), "TOT:", val )
         super(StepsLinearElement, self).draw3(drawer, resources, val)
 
 
     def createChildForParameter(self, parameter):
         if parameter.getId() == 1:
             self._imageIndex = parameter.getValue()
-            print ("ARRAY",self._imageIndex)
+            #print ("ARRAY",self._imageIndex)
             from watchFaceParser.models.elements.basic.valueElement import ValueElement
             return ValueElement(parameter, self, '?ImageIndex?')
-            print ( parameter.getValue(),parameter.getChildren())
+            #print ( parameter.getValue(),parameter.getChildren())
         elif parameter.getId() == 2:
-            print ( [ c.getValue() for c in  parameter.getChildren()])
+            #print ( [ c.getValue() for c in  parameter.getChildren()])
             from watchFaceParser.models.elements.common.coordinatesElement import CoordinatesElement
             #print ( parameter.getValue(),parameter.getChildren())
             #print (self.getName(),[c.getValue() for c in parameter.getChildren()])

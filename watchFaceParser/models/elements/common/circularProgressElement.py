@@ -12,6 +12,7 @@ class CircularProgressElement(CoordinatesElement):
         self._width = None
         self._color = None
         self._flatness = None
+        self._imageIndex = None
         super(CircularProgressElement, self).__init__(parameter = parameter, parent = parent, name = name)
 
 
@@ -42,6 +43,8 @@ class CircularProgressElement(CoordinatesElement):
     def getFlatness(self):
         return self._flatness # TODO: works on real watch. no effects on previews.
 
+    def getImageIndex(self):
+        return self._imageIndex
 
     def draw4(self, drawer, resources, value, total):
         assert(type(resources) == list)
@@ -86,5 +89,9 @@ class CircularProgressElement(CoordinatesElement):
         elif parameterId == 9:
             self._flatness = parameter.getValue()
             return ValueElement(parameter = parameter, parent = self, name = '?_flatness?')
+        elif parameterId == 10:
+            self._imageIndex = parameter.getValue()
+            from watchFaceParser.models.elements.basic.valueElement import ValueElement
+            return ValueElement(parameter, self, '?ImageIndex?')
         else:
             return super(CircularProgressElement, self).createChildForParameter(parameter)

@@ -20,12 +20,12 @@ class IconSetElement(CoordinatesElement):
 
 
     def draw3(self, drawer, resources, state, cursor = None):
-        print ("IconSetElement",self)
+        #print ("IconSetElement",self)
         self.draw2(drawer, resources, state, cursor)
 
 
     def draw2(self, drawer, images, state = None, cursor = None):
-        print("getCoorArray",self.getCoordinatesArray(),self._imageIndex,len( self.getCoordinatesArray()),state)
+        #print("getCoorArray",self.getCoordinatesArray(),self._imageIndex,len( self.getCoordinatesArray()),state)
         initial = 0
         if cursor == True:
             initial = state
@@ -33,7 +33,7 @@ class IconSetElement(CoordinatesElement):
             x = self.getCoordinatesArray()[i]._x
             y = self.getCoordinatesArray()[i]._y
             temp = images[self._imageIndex + i].getBitmap()
-            print (temp, x, y, state)
+            #print (temp, x, y, state)
             drawer.paste(temp, (x,y), temp)
 
 
