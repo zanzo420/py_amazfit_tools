@@ -7,4 +7,4 @@ class PulseClockHandElement(ClockHandElement):
 
     def draw3(self, drawer, resources, state):
         assert(type(resources) == list)
-        super(PulseClockHandElement, self).draw4(drawer, resources, state.getPulse(), 150)
+        super(PulseClockHandElement, self).draw4(drawer, resources, state.getPulse(), 200)
