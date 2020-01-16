@@ -176,105 +176,40 @@ class Parser:
         states = Parser.getPreviewStates(outputDirectory)
         logging.debug("Generating states done...")
         staticPreview = PreviewGenerator.createImage(parameters, images, WatchState())
-        
-        #https://stackoverflow.com/questions/7787375/python-imaging-library-pil-drawing-rounded-rectangle-with-gradient/7788322#7788322
-        from PIL import Image, ImageDraw
-        def round_corner(radius):
-            """Draw a round corner"""
-            corner = Image.new('RGBA', (radius, radius), (0, 0, 0, 0))
-            draw = ImageDraw.Draw(corner)
-            draw.pieslice((0, 0, radius * 2, radius * 2), 180, 270, fill="blue")
-            return corner        
-        
-
-        def round_rectangle(size, radius, startFill, stopFill, runTopBottom = False):
-            width, height = size
-            rectangle = Image.new('RGBA', size)
-            origCorner = round_corner(radius)
-			
-            # upper left
-            corner = origCorner
-            rectangle.paste(corner, (0, 0))
-
-            # lower left
-            corner = origCorner.rotate(90)
-            rectangle.paste(corner, (0, height - radius))
-            
-            # lower right
-            corner = origCorner.rotate(180)
-            rectangle.paste(corner, (width - radius, height - radius))
-            
-            # upper right
-            corner = origCorner.rotate(270)
-            rectangle.paste(corner, (width - radius, 0))
-            return rectangle
-			
-        from PIL.ImageDraw import ImageDraw
-        
-        def rounded_rectangle(self: ImageDraw, xy, corner_radius, fill=None, outline=None):
-            upper_left_point = xy[0]
-            bottom_right_point = xy[1]
-            self.rectangle(
-                [
-                    (upper_left_point[0], upper_left_point[1] + corner_radius),
-                    (bottom_right_point[0], bottom_right_point[1] - corner_radius)
-                ],
-                fill=fill,
-                outline=outline
-            )
-            self.rectangle(
-                [
-                    (upper_left_point[0] + corner_radius, upper_left_point[1]),
-                    (bottom_right_point[0] - corner_radius, bottom_right_point[1])
-                ],
-                fill=fill,
-                outline=outline
-            )
-            self.pieslice([upper_left_point, (upper_left_point[0] + corner_radius * 2, upper_left_point[1] + corner_radius * 2)],
-                180,
-                270,
-                fill=fill,
-                outline=outline
-            )
-            self.pieslice([(bottom_right_point[0] - corner_radius * 2, bottom_right_point[1] - corner_radius * 2), bottom_right_point],
-                0,
-                90,
-                fill=fill,
-                outline=outline
-            )
-            self.pieslice([(upper_left_point[0], bottom_right_point[1] - corner_radius * 2), (upper_left_point[0] + corner_radius * 2, bottom_right_point[1])],
-                90,
-                180,
-                fill=fill,
-                outline=outline
-            )
-            self.pieslice([(bottom_right_point[0] - corner_radius * 2, upper_left_point[1]), (bottom_right_point[0], upper_left_point[1] + corner_radius * 2)],
-                270,
-                360,
-                fill=fill,
-                outline=outline
-            )
-        
-        
-        ImageDraw.rounded_rectangle = rounded_rectangle
-        size = (200, 320)
-        # An example: 
-        from PIL import Image, ImageDraw, ImageFont 
-        new_image = Image.new("RGBA", size, (255, 255, 255, 0)) 
-        d = ImageDraw.Draw(new_image) 
-        d.rounded_rectangle(xy, corner_radius)
- 
-        #img = round_rectangle((200, 320), 40, (255,0,0), (0,255,0), True)
-        #img.save("test.png", 'PNG')	
-        new_image.save("test.png", 'PNG')	
-
+         
         logging.debug("Generating static preview gen done...")
         staticPreview.save(os.path.join(outputDirectory, f"{baseName}_static.png"))
 
         #generate small preview image for Preview section.
-        from PIL import Image
+        from PIL import Image, ImageDraw, ImageOps
         new_w, new_h = Config.getPreviewSize()
-        im_resized = staticPreview.resize((new_w, new_h), resample = Image.LANCZOS)
+        if Config.isGtsMode:
+            im_resized = ImageOps.expand(staticPreview, border=5)
+            im_resized = im_resized.resize((new_w, new_h), resample = Image.LANCZOS)
+        else:
+            im_resized = staticPreview.resize((new_w, new_h), resample = Image.LANCZOS)
+        def rounded_rectangle(draw, box, radius, color):
+            l, t, r, b = box
+            d = radius * 2
+            draw.ellipse((l, t, l + d, t + d), color)
+            draw.ellipse((r - d, t, r, t + d), color)
+            draw.ellipse((l, b - d, l + d, b), color)
+            draw.ellipse((r - d, b - d, r, b), color)
+            d = radius
+            draw.rectangle((l, t + d, r, b - d), color)
+            draw.rectangle((l + d, t, r - d, b), color)
+        
+        xy = (10,310)
+        corner_radius = 38
+
+        if Config.isGtsMode:
+            mask = Image.new("RGBA", Config.getPreviewSize(), (255, 255, 255, 0)) 
+            d = ImageDraw.Draw(mask)
+		    
+            rounded_rectangle(d,(3,3 , new_w -3,new_h-3),corner_radius,(180,180,180,255))
+            rounded_rectangle(d,(5,5 , new_w-5,new_h-5),corner_radius,(255,255,255,0))
+            im_resized.paste(mask,(0,0),mask)
+
         im_resized.save(os.path.join(outputDirectory, f"{baseName}_static_{new_h}.png"))
         logging.debug("Generating static preview save done...")
 
