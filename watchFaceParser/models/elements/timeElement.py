@@ -108,5 +108,6 @@ class TimeElement(ContainerElement):
             self._pm = PmElement(parameter = parameter, parent = self, name = 'Pm')
             return self._pm
         else:
+            print ("Unknown TimeElement",parameterId)
             return super(TimeElement, self).createChildForParameter(parameter)
 

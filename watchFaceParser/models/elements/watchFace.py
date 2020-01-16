@@ -100,4 +100,5 @@ class WatchFace(ContainerElement):
             self._daysProgress = DaysProgressElement(parameter)
             return self._daysProgress
         else:
+            print ("Unknown WatchFace",parameterId)
             return super(WatchFace, self).createChildForParameter(parameter)

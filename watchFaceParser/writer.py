@@ -55,10 +55,10 @@ class Writer:
 
         logging.debug("Writing parameters...")
         for encodedParameter in encodedParameters:
-            print ("parameterDescriptor",encodedParameter)
+            #print ("parameterDescriptor",encodedParameter)
             stream = encodedParameters[encodedParameter]
-            stream.seek(0)
-            print ([ "%02x" % x for x in stream.read()])
+            #stream.seek(0)
+            #print ([ "%02x" % x for x in stream.read()])
             stream.seek(0, 0)
             self._stream.write(stream.read())
 

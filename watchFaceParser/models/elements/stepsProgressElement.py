@@ -52,9 +52,10 @@ class StepsProgressElement(ContainerElement):
             from watchFaceParser.models.elements.goalProgress.stepsClockHandElement import StepsClockHandElement # must must be own. fix it!!
             self._clockHand = StepsClockHandElement(parameter = parameter, parent = self, name = 'ClockHand')
             return self._clockHand
-        # elif parameterId == 5:
-        #     from watchFaceParser.models.elements.goalProgress.circularGoalProgressElement import CircularGoalProgressElement
-        #     self._circular2 = CircularGoalProgressElement(parameter = parameter, parent = self, name = 'Circular2')
-        #     return self._circular2
+        elif parameterId == 5:
+            from watchFaceParser.models.elements.goalProgress.circularGoalProgressElement import CircularGoalProgressElement
+            self._circular2 = CircularGoalProgressElement(parameter = parameter, parent = self, name = 'Circular2')
+            return self._circular2
         else:
+            print ("Unknown StepsProgressElement",parameterId)
             return super(StepsProgressElement, self).createChildForParameter(parameter)

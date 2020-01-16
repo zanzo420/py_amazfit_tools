@@ -29,5 +29,6 @@ class WeatherElement(ContainerElement):
 #            self._temperature = TemperatureElement(parameter = parameter, parent = self, name = '?_temperature?')
 #            return self._temperature
         else:
+            print ("Unknown WeatherElement",parameterId)
             return super(WeatherElement, self).createChildForParameter(parameter)
 
