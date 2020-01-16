@@ -26,6 +26,7 @@ class Config:
             print("Detected GTS")
             Config.setGtsMode(True)
         else:
+            Config._autodetect = False
             print("default_verge")
 
     @staticmethod

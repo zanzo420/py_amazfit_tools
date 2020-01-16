@@ -188,6 +188,7 @@ class Parser:
             im_resized = im_resized.resize((new_w, new_h), resample = Image.LANCZOS)
         else:
             im_resized = staticPreview.resize((new_w, new_h), resample = Image.LANCZOS)
+
         def rounded_rectangle(draw, box, radius, color):
             l, t, r, b = box
             d = radius * 2
@@ -202,7 +203,7 @@ class Parser:
         xy = (10,310)
         corner_radius = 38
 
-        if Config.isGtsMode:
+        if Config.isGtsMode():
             mask = Image.new("RGBA", Config.getPreviewSize(), (255, 255, 255, 0)) 
             d = ImageDraw.Draw(mask)
 		    
