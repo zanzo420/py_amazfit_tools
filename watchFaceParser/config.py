@@ -1,6 +1,7 @@
 class Config:
     _is_gtr = False
     _is_gts = False
+    _is_trex = False
     _image_size = (360, 360)
     _preview_size = (210, 210)
     _autodetect = True
@@ -44,6 +45,16 @@ class Config:
     @staticmethod
     def isGtrMode():
         return Config._is_gtr
+
+    @staticmethod
+    def isTrexMode():
+        return Config._is_trex
+
+    @staticmethod
+    def setTrexMode(trex):
+        if trex:
+            Config._autodetect = False
+            Config._is_trex = 50
 
     @staticmethod
     def setGtsMode(gts):
