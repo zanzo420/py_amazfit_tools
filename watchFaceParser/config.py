@@ -1,4 +1,5 @@
 class Config:
+    _deviceId = None
     _is_gtr = False
     _is_gts = False
     _is_trex = False
@@ -9,6 +10,18 @@ class Config:
     _size_gtr_47 = (454, 454)
     _size_gtr_42 = (390, 390)
     _size_gts = (348,442)
+
+    @staticmethod
+    def setDeviceId(deviceId):
+        Config._deviceId = deviceId
+        if Config._autodetect:
+            if deviceId == 0x34:
+                print("Detected T-Rex")
+                Config.setTrexMode(True)             
+            
+    @staticmethod
+    def getDeviceId():
+        return Config._deviceId
 
     @staticmethod
     def getAutodetect():

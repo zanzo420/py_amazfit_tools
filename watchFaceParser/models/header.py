@@ -4,15 +4,16 @@ from watchFaceParser.config import Config
 class Header:
     dialSignature = b"HMDIAL\0"
 
+    deviceIdPos = 0
     headerSize = 40
     unknownPos = 32
     parametersSizePos = 36
 
-    def __init__(self, unknown, parametersSize):
+    def __init__(self, unknown, parametersSize, deviceId = None):
         self.signature = Header.dialSignature
         self.unknown = unknown
         self.parametersSize = parametersSize
-
+        self.deviceId = deviceId
 
     def isValid(self):
         return self.signature == Header.dialSignature
@@ -81,9 +82,9 @@ class Header:
             Header.parametersSizePos = 56 - 16
 
         buffer = stream.read(Header.headerSize)
-
         header = Header(
             unknown = int.from_bytes(buffer[Header.unknownPos:Header.unknownPos+4], byteorder='little'),
-            parametersSize = int.from_bytes(buffer[Header.parametersSizePos:Header.parametersSizePos+4], byteorder='little'))
+            parametersSize = int.from_bytes(buffer[Header.parametersSizePos:Header.parametersSizePos+4], byteorder='little'),
+            deviceId = int.from_bytes(buffer[Header.deviceIdPos:Header.deviceIdPos+1], byteorder='little'))
         header.signature = sig_buffer[0:7]
         return header

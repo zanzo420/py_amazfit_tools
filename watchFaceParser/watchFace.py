@@ -1,3 +1,4 @@
+from watchFaceParser.elements.deviceId import DeviceId
 from watchFaceParser.elements.background import Background
 from watchFaceParser.elements.time import Time
 from watchFaceParser.elements.activity import Activity
@@ -12,6 +13,7 @@ from watchFaceParser.elements.weather import Weather
 
 class WatchFace:
     definitions = {
+        0: { 'Name': 'Info', 'Type': DeviceId},
         2: { 'Name': 'Background', 'Type': Background},
         3: { 'Name': 'Time', 'Type': Time},
         4: { 'Name': 'Activity', 'Type': Activity},

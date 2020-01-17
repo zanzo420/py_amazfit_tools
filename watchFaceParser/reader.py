@@ -2,6 +2,7 @@ import logging
 import io
 
 from watchFaceParser.models.parameter import Parameter
+from watchFaceParser.config import Config
 
 
 class Reader:
@@ -16,7 +17,9 @@ class Reader:
         from watchFaceParser.models.header import Header
         header = Header.readFrom(self._stream)
         logging.info("Header was read:")
-        logging.info(f"Signature: {header.signature}, Unknown: {header.unknown}, ParametersSize: {header.parametersSize}, isValid: {header.isValid()}")
+        logging.info(f"Signature: {header.signature}, Unknown: {header.unknown}, ParametersSize: {header.parametersSize}, isValid: {header.isValid()}, deviceId: {header.deviceId}")
+
+        Config.setDeviceId(header.deviceId)
 
         if not header.isValid():
             return
@@ -61,6 +64,7 @@ class Reader:
             descriptorStream.seek(0)
             #print ([ "%02x" % x for x in descriptorStream.read()])
 
+        result.insert(0, Parameter(0, [Parameter(1, Config.getDeviceId())]))
         return result
 
 

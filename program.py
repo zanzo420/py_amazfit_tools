@@ -63,6 +63,9 @@ class Parser:
 
             logging.debug("Building parameters for watch face...")
             descriptor = ParametersConverter.build(WatchFace, watchFace)
+            if descriptor[0].getId() == 0:
+                #dirty hack to retrieve the deviceid from json
+                Config.setDeviceId(descriptor.pop(0).getChildren()[0].getValue())
 
             baseName, _ = os.path.splitext(os.path.basename(outputFileName))
             Parser.generatePreviews(descriptor, imagesReader.getImages(), outputDirectory, baseName)

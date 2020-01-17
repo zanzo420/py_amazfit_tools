@@ -6,7 +6,7 @@ from watchFaceParser.models.parameterFlags import ParameterFlags
 from watchFaceParser.models.textAlignment import TextAlignment
 from watchFaceParser.models.color import Color
 from watchFaceParser.models.parameter import Parameter
-
+from watchFaceParser.config import Config
 
 def ulong2long(n):
     if type(n) == int:
@@ -34,7 +34,6 @@ class ParametersConverter:
         result = []
         #print ("T",T)
         properties = ElementsHelper.sortedProperties(T)
-#        print ("X",properties)
         for _id in properties:
             currentPath = str(_id) if path == None or path == '' else ''.join([path, '.', str(_id)])
 
