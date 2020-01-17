@@ -57,7 +57,6 @@ class CircularProgressElement(CoordinatesElement):
         #print ("_imageIndex",self._imageIndex)
         if self._imageIndex:
             temp = resources[self._imageIndex].getBitmap()
-            print (drawer,self.getColor())
             from PIL import Image
             #mask = Image.new('RGBA',temp.size,self.getColor())
             mask = Image.new('RGBA',temp.size,(0,0,0,0))
@@ -71,10 +70,44 @@ class CircularProgressElement(CoordinatesElement):
     
             d.arc(rect, start = -90 + self.getStartAngle(), end = -90 + self.getStartAngle() + sectorAngle, fill = self.getColor(), width = self.getWidth())
 
+            if self._flatness == 0:
+                #round edges
+                import math
+                x = int(temp.size[0] / 2 + (radius - self.getWidth() / 2) *math.cos(math.pi * (self.getStartAngle() - 90)/180))
+                y = int(temp.size[1] / 2 + (radius - self.getWidth() / 2) *math.sin(math.pi * (self.getStartAngle() - 90)/180))
+                d.ellipse((x- self.getWidth() / 2+1, y- self.getWidth() / 2+1, x+self.getWidth()/2-1, y+self.getWidth()/2-1), fill = self.getColor())
+    
+                x = int(temp.size[0] / 2 + (radius - self.getWidth() / 2) *math.cos(math.pi * (self.getStartAngle()+ sectorAngle - 90)/180))
+                y = int(temp.size[1] / 2 + (radius - self.getWidth() / 2) *math.sin(math.pi * (self.getStartAngle()+ sectorAngle - 90)/180))
+                d.ellipse((x- self.getWidth() / 2+1, y- self.getWidth() / 2+1, x+self.getWidth()/2-1, y+self.getWidth()/2-1), fill = self.getColor())
+            elif self._flatness == 90:
+                #spike
+                import math
+                x1 = int(temp.size[0] / 2 + (radius - self.getWidth()) *math.cos(math.pi * (self.getStartAngle() - 90)/180))
+                y1 = int(temp.size[1] / 2 + (radius - self.getWidth()) *math.sin(math.pi * (self.getStartAngle() - 90)/180))
+			    
+                x2 = int(temp.size[0] / 2 + radius *math.cos(math.pi * (self.getStartAngle() - 90)/180))
+                y2 = int(temp.size[1] / 2 + radius *math.sin(math.pi * (self.getStartAngle() - 90)/180))
+			    
+                x3 = int(temp.size[0] / 2 + (radius - self.getWidth() / 2) *math.cos(math.pi * (self.getStartAngle() -self.getWidth() * 360 / (2*math.pi * (radius - self.getWidth() / 2)) - 90)/180))
+                y3 = int(temp.size[1] / 2 + (radius - self.getWidth() / 2) *math.sin(math.pi * (self.getStartAngle() -self.getWidth() * 360 / (2*math.pi * (radius - self.getWidth() / 2))- 90)/180))
+                d.polygon([(x1,y1), (x2, y2), (x3,y3)], fill = self.getColor())
+			    
+                x1 = int(temp.size[0] / 2 + (radius - self.getWidth()) *math.cos(math.pi * (self.getStartAngle()+ sectorAngle - 90)/180))
+                y1 = int(temp.size[1] / 2 + (radius - self.getWidth()) *math.sin(math.pi * (self.getStartAngle()+ sectorAngle - 90)/180))
+			    
+                x2 = int(temp.size[0] / 2 + radius *math.cos(math.pi * (self.getStartAngle()+ sectorAngle - 90)/180))
+                y2 = int(temp.size[1] / 2 + radius *math.sin(math.pi * (self.getStartAngle()+ sectorAngle - 90)/180))
+			    
+                x3 = int(temp.size[0] / 2 + (radius - self.getWidth() / 2) *math.cos(math.pi * (self.getStartAngle()+ sectorAngle +self.getWidth() * 360 / (2*math.pi * (radius - self.getWidth() / 2)) - 90)/180))
+                y3 = int(temp.size[1] / 2 + (radius - self.getWidth() / 2) *math.sin(math.pi * (self.getStartAngle()+ sectorAngle +self.getWidth() * 360 / (2*math.pi * (radius - self.getWidth() / 2))- 90)/180))
+                d.polygon([(x1,y1), (x2, y2), (x3,y3)], fill = self.getColor())
+            elif self._flatness == 180:
+                pass
             drawer.paste(temp, (self.getX() - self.getRadiusX() - int(self._width  / 2), self.getY() - self.getRadiusY() - int(self._width  / 2)), mask)
 
-        else:
 
+        else:
             from PIL import ImageDraw
             d = ImageDraw.Draw(drawer) # draw context
             radius = self.getRadiusX() + int(self.getWidth() / 2) # patch for PIL arc
@@ -83,6 +116,41 @@ class CircularProgressElement(CoordinatesElement):
                 int(self.getX() + radius), int(self.getY() + radius))
     
             d.arc(rect, start = -90 + self.getStartAngle(), end = -90 + self.getStartAngle() + sectorAngle, fill = self.getColor(), width = self.getWidth())
+
+            if self._flatness == 0:
+                #round edges
+                import math
+                x = int(self.getX() + (radius - self.getWidth() / 2) *math.cos(math.pi * (self.getStartAngle() - 90)/180))
+                y = int(self.getY() + (radius - self.getWidth() / 2) *math.sin(math.pi * (self.getStartAngle() - 90)/180))
+                d.ellipse((x- self.getWidth() / 2+1, y- self.getWidth() / 2+1, x+self.getWidth()/2-1, y+self.getWidth()/2-1), fill = self.getColor())
+			    
+                x = int(self.getX() + (radius - self.getWidth() / 2) *math.cos(math.pi * (self.getStartAngle()+ sectorAngle - 90)/180))
+                y = int(self.getY() + (radius - self.getWidth() / 2) *math.sin(math.pi * (self.getStartAngle()+ sectorAngle - 90)/180))
+                d.ellipse((x- self.getWidth() / 2+1, y- self.getWidth() / 2+1, x+self.getWidth()/2-1, y+self.getWidth()/2-1), fill = self.getColor())
+            elif self._flatness == 90:
+                #spike
+                import math
+                x1 = int(self.getX() + (radius - self.getWidth()) *math.cos(math.pi * (self.getStartAngle() - 90)/180))
+                y1 = int(self.getY() + (radius - self.getWidth()) *math.sin(math.pi * (self.getStartAngle() - 90)/180))
+    
+                x2 = int(self.getX() + radius *math.cos(math.pi * (self.getStartAngle() - 90)/180))
+                y2 = int(self.getY() + radius *math.sin(math.pi * (self.getStartAngle() - 90)/180))
+    
+                x3 = int(self.getX() + (radius - self.getWidth() / 2) *math.cos(math.pi * (self.getStartAngle() -self.getWidth() * 360 / (2*math.pi * (radius - self.getWidth() / 2)) - 90)/180))
+                y3 = int(self.getY() + (radius - self.getWidth() / 2) *math.sin(math.pi * (self.getStartAngle() -self.getWidth() * 360 / (2*math.pi * (radius - self.getWidth() / 2))- 90)/180))
+                d.polygon([(x1,y1), (x2, y2), (x3,y3)], fill = self.getColor())
+    
+                x1 = int(self.getX() + (radius - self.getWidth()) *math.cos(math.pi * (self.getStartAngle()+ sectorAngle - 90)/180))
+                y1 = int(self.getY() + (radius - self.getWidth()) *math.sin(math.pi * (self.getStartAngle()+ sectorAngle - 90)/180))
+    
+                x2 = int(self.getX() + radius *math.cos(math.pi * (self.getStartAngle()+ sectorAngle - 90)/180))
+                y2 = int(self.getY() + radius *math.sin(math.pi * (self.getStartAngle()+ sectorAngle - 90)/180))
+    
+                x3 = int(self.getX() + (radius - self.getWidth() / 2) *math.cos(math.pi * (self.getStartAngle()+ sectorAngle +self.getWidth() * 360 / (2*math.pi * (radius - self.getWidth() / 2)) - 90)/180))
+                y3 = int(self.getY() + (radius - self.getWidth() / 2) *math.sin(math.pi * (self.getStartAngle()+ sectorAngle +self.getWidth() * 360 / (2*math.pi * (radius - self.getWidth() / 2))- 90)/180))
+                d.polygon([(x1,y1), (x2, y2), (x3,y3)], fill = self.getColor())
+            elif self._flatness == 180:
+                pass
 
 
     def createChildForParameter(self, parameter):

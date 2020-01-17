@@ -46,11 +46,11 @@ class ClockHandElement(CompositeElement):
             if self.getSector().getEndAngle():
                 _endAngle = self.getSector().getEndAngle() / 100
 
-        print ("_startAngle",_startAngle)
-        print ("_endAngle",_endAngle)
+        #print ("_startAngle",_startAngle)
+        #print ("_endAngle",_endAngle)
         if self.getCenterImage():
             angle = 360 - _startAngle - int(value * (_endAngle - _startAngle ) / total)
-            print ("value", value, "total",total,"angle",angle)
+            #print ("value", value, "total",total,"angle",angle)
             self.getCenterImage().draw2(drawer, resources, angle, self.getCenter())
 #360 - (10 * 225 / 150)
 
