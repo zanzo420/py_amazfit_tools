@@ -58,5 +58,6 @@ class TemperatureElement(CompositeElement):
             self._symbols = SymbolsElement(parameter, self, '?_symbols?')
             return self._symbols
         else:
+            print ("Unknown TemperatureElement",parameterId)
             super(TemperatureElement, self).createChildForParameter(parameter)
 
