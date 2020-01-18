@@ -34,13 +34,15 @@ class TemperatureElement(CompositeElement):
                 if self.getSymbols().getMinusImageIndex():
                     images.append(resources[self.getSymbols().getMinusImageIndex()])
 
-            images.extend(self.getCurrent().getImagesForNumber(resources, temperature))
+            if self.getCurrent():
+                images.extend(self.getCurrent().getImagesForNumber(resources, temperature))
 
             if self.getSymbols().getDegreesImageIndex():
                 images.append(resources[self.getSymbols().getDegreesImageIndex()])
 
-        from watchFaceParser.helpers.drawerHelper import DrawerHelper
-        DrawerHelper.drawImages(drawer, images, uint2int(self.getCurrent().getSpacing()), self.getCurrent().getAlignment(), self.getCurrent().getBox())
+        if self.getCurrent():
+            from watchFaceParser.helpers.drawerHelper import DrawerHelper
+            DrawerHelper.drawImages(drawer, images, uint2int(self.getCurrent().getSpacing()), self.getCurrent().getAlignment(), self.getCurrent().getBox())
 
 
     def createChildForParameter(self, parameter):
