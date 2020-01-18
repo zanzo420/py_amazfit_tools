@@ -59,7 +59,9 @@ class WatchFace(ContainerElement):
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
-        if parameterId == 2:
+        if parameterId == 0:
+            pass
+        elif parameterId == 2:
             from watchFaceParser.models.elements.backgroundElement import BackgroundElement
             self._background = BackgroundElement(parameter)
             return self._background

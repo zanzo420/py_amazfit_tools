@@ -8,6 +8,6 @@ class Temperature:
         1: { 'Name': 'Current', 'Type': Number},
         2: { 'Name': 'Today', 'Type': Today},
         3: { 'Name': 'Symbols', 'Type': Symbols},
-		4: { 'Name': 'TemperatureMeter', 'Type': CircleScale}, #gts- Fluorescence
+        4: { 'Name': 'TemperatureMeter', 'Type': CircleScale}, #gts- Fluorescence
     }
 
