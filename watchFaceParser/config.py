@@ -15,7 +15,19 @@ class Config:
     def setDeviceId(deviceId):
         Config._deviceId = deviceId
         if Config._autodetect:
-            if deviceId == 0x34:
+            if deviceId == 0x20:
+                print("Detected Verge Lite")
+                Config.setVergeLiteMode(True)
+            elif deviceId == 0x28:
+                print("Detected GTR (47mm)")
+                Config.setGtrMode(47)
+            elif deviceId == 0x2a:
+                print("Detected GTR (42mm)")
+                Config.setGtrMode(42)
+            elif deviceId == 0x2e:
+                print("Detected GTS")
+                Config.setGtsMode(True)
+            elif deviceId == 0x34:
                 print("Detected T-Rex")
                 Config.setTrexMode(True)             
             
@@ -27,22 +39,6 @@ class Config:
     def getAutodetect():
 	    return Config._autodetect
 	
-    @staticmethod
-    def autodetect(size):
-        print ("Autodetect device")
-        if size == Config._size_gtr_47:
-            print("Detected GTR (47mm)")
-            Config.setGtrMode(47)
-        elif size == Config._size_gtr_42:
-            print("Detected GTR (42mm)")
-            Config.setGtrMode(42)
-        elif size == Config._size_gts:
-            print("Detected GTS")
-            Config.setGtsMode(True)
-        else:
-            Config._autodetect = False
-            print("default_verge")
-
     @staticmethod
     def setGtrMode(gtr):
         Config._is_gtr = gtr
@@ -62,6 +58,12 @@ class Config:
     @staticmethod
     def isTrexMode():
         return Config._is_trex
+
+    @staticmethod
+    def setVergeLiteMode(vergelite):
+        if vergelite:
+            Config._autodetect = False
+            #Config._is_trex = 50
 
     @staticmethod
     def setTrexMode(trex):

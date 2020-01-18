@@ -20,11 +20,6 @@ class PreviewGenerator:
     def createFrame(watchFace, resources, state):
         from PIL import Image, ImageDraw
 
-        if Config.getAutodetect():
-            Config.autodetect(resources[0].getBitmap().size)
-        elif resources[0].getBitmap().size != Config.getImageSize():
-            print ("WARNING - Configured watch display size is different from extracted image1 size")
-
         # graphics = Image.new('RGBA', (360, 360))
         graphics = Image.new('RGBA', Config.getImageSize())
         watchFace.draw3(graphics, resources, state)
