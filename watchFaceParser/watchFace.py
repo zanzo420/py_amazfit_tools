@@ -7,8 +7,9 @@ from watchFaceParser.elements.stepsProgress import StepsProgress
 from watchFaceParser.elements.status import Status
 from watchFaceParser.elements.battery import Battery
 from watchFaceParser.elements.analogDialFace import AnalogDialFace
+from watchFaceParser.elements.unknownType11 import UnknownType11
 from watchFaceParser.elements.unknownType14 import UnknownType14
-from watchFaceParser.elements.unknownType16 import UnknownType16
+from watchFaceParser.elements.shortcuts import Shortcuts
 from watchFaceParser.elements.daysProgress import DaysProgress
 from watchFaceParser.elements.weather import Weather
 
@@ -24,7 +25,8 @@ class WatchFace:
         8: { 'Name': 'Status', 'Type': Status},
         9: { 'Name': 'Battery', 'Type': Battery},
         10: { 'Name': 'AnalogDialFace', 'Type': AnalogDialFace},
+        11: { 'Name': 'Unknown11', 'Type': UnknownType11},
         14: { 'Name': 'Unknown14', 'Type': UnknownType14},
         15: { 'Name': 'DaysProgress', 'Type': DaysProgress},
-        16: { 'Name': 'Shortcut', 'Type': UnknownType16}, #stargate.bin
+        16: { 'Name': 'Shortcuts', 'Type': Shortcuts}, #stargate.bin
     }

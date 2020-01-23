@@ -2,7 +2,6 @@
 
 from watchFaceParser.models.elements.basic.containerElement import ContainerElement
 
-
 class DateElement(ContainerElement):
     def __init__(self, parameter, parent = None, name = None):
         self._monthAndDay = None

@@ -20,4 +20,11 @@ class WeekDayElement(ImageSetElement):
     def draw3(self, drawer, resources, state):
         assert(type(resources) == list)
         # super(WeekDayElement, self).draw3(drawer, resources, DaysOfWeek[state.time.DayOfWeek]);
-        super(WeekDayElement, self).draw3(drawer, resources, state.getTime().weekday())
+        import locale
+        nl = locale.getdefaultlocale()
+        offset = 0
+        if len(nl)>0 and not nl[0].startswith('zh') and self.getImagesCount()==21:
+            offset = 14
+        if len(nl)>0 and not nl[0].startswith('zh') and self.getImagesCount()==14:
+            offset = 7
+        super(WeekDayElement, self).draw3(drawer, resources, state.getTime().weekday() + offset)

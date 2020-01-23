@@ -7,10 +7,8 @@ class ImageSetElement(ImageElement):
         self._imagesCount = None
         super(ImageSetElement, self).__init__(parameter = parameter, parent = parent, name = name)
 
-
     def getImagesCount(self):
         return self._imagesCount
-
 
     def draw3(self, drawer, resources, index):
         assert(type(resources) == list)
