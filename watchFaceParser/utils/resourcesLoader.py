@@ -96,7 +96,8 @@ class ResourcesLoader:
                     for i in range(lastImageIndexValue + 1, lastImageIndexValue + imagesCount):
                         self.loadImage(i)
             else:
-                if isinstance(propertyValue,list):
+                if lastImageIndexValue and isinstance(propertyValue,list):
+                    print ("DEBUG",lastImageIndexValue,lastImageIndexValue,propertyValue)
                     for i in range(lastImageIndexValue+1, lastImageIndexValue+len(propertyValue)):
                         self.loadImage(i)
                 if imagesCountAttribute == None and imageIndexAttribute == None:
