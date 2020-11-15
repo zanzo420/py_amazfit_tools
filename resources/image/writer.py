@@ -59,16 +59,23 @@ class Writer:
             self._writer.write(a.to_bytes(1, byteorder='little'))
 
     def writeImage16(self):
-        logging.debug("Writing image...")
+        logging.debug("Writing image 16 bit/pixel...")
 
         pixels = self._image.convert('RGBA')
         data = pixels.getdata()
 
         for pixel in data:
             (r, g, b, a) = pixel
-            b = 0
-            g = 0
-            #firstByte = rowBytes[x * self._step]
-            #secondByte = rowBytes[x * self._step + 1]
-            self._writer.write(b.to_bytes(1, byteorder='little'))
-            self._writer.write(g.to_bytes(1, byteorder='little'))
+            #b = 0
+            #g = 0
+            temp_b = ((b >> 3) & 0x1f);
+            temp_g = (((g >> 2) & 0x7) << 5);
+            firstByte = (temp_b | temp_g);
+
+            temp_g2 = ((g >> 5) & 0x07);
+            temp_r = (((r >> 3) & 0x1f) << 3);
+            secondByte = (temp_g2 | temp_r);
+            self._writer.write(firstByte.to_bytes(1, byteorder='little'))
+            self._writer.write(secondByte.to_bytes(1, byteorder='little'))
+            #self._writer.write(b.to_bytes(1, byteorder='little'))
+            #self._writer.write(g.to_bytes(1, byteorder='little'))
