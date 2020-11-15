@@ -52,14 +52,17 @@ class Header:
             47 : [0x28, 0x00, 0x8c, 0xea, 0x00, 0x00, 0x01, 0xbc], # gtr 47
             42 : [0x2a, 0x00, 0x72, 0xeb, 0x00, 0x00, 0x5c, 0xd3], # gtr 42
             50 : [0x34, 0x00, 0x1e, 0x1c, 0x00, 0x00, 0x49, 0xce], # trex
+            53 : [0x35, 0x00, 0x09, 0x00, 0x00, 0x00, 0x4b, 0x9a], # AmazfitX
         }
-		
+
         if Config.isGtrMode():
             index = Config.isGtrMode()
         if Config.isGtsMode():
             index = Config.isGtsMode()
         if Config.isTrexMode():
             index = Config.isTrexMode()
+        if Config.isAmazfitXMode():
+            index = Config.isAmazfitXMode()
         p_0x10 = data_0x10[index]
         for i in range(len(p_0x10)):
             buffer[0x10 + i] = p_0x10[i]

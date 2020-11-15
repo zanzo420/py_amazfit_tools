@@ -3,6 +3,7 @@ class Config:
     _is_gtr = False
     _is_gts = False
     _is_trex = False
+    _is_amazfitx = False
     _image_size = (360, 360)
     _preview_size = (210, 210)
     _autodetect = True
@@ -10,6 +11,7 @@ class Config:
     _size_gtr_47 = (454, 454)
     _size_gtr_42 = (390, 390)
     _size_gts = (348,442)
+    _size_amazfitx = (206,640)
 
     @staticmethod
     def setDeviceId(deviceId):
@@ -29,7 +31,10 @@ class Config:
                 Config.setGtsMode(True)
             elif deviceId == 0x34:
                 print("Detected T-Rex")
-                Config.setTrexMode(True)             
+                Config.setTrexMode(True)  
+            elif deviceId == 0x35:
+                print("Detected AmazfitX")
+                Config.setAmazfitXMode(True)      
             
     @staticmethod
     def getDeviceId():
@@ -37,8 +42,8 @@ class Config:
 
     @staticmethod
     def getAutodetect():
-	    return Config._autodetect
-	
+        return Config._autodetect
+
     @staticmethod
     def setGtrMode(gtr):
         Config._is_gtr = gtr
@@ -60,16 +65,27 @@ class Config:
         return Config._is_trex
 
     @staticmethod
+    def isAmazfitXMode():
+        return Config._is_amazfitx
+
+    @staticmethod
     def setVergeLiteMode(vergelite):
         if vergelite:
             Config._autodetect = False
-            #Config._is_trex = 50
 
     @staticmethod
     def setTrexMode(trex):
         if trex:
             Config._autodetect = False
             Config._is_trex = 50
+
+    @staticmethod
+    def setAmazfitXMode(amazfitx):
+        if amazfitx:
+            Config._autodetect = False
+            Config._is_amazfitx = 53
+            Config._image_size = Config._size_amazfitx
+            Config._preview_size = (152,472)
 
     @staticmethod
     def setGtsMode(gts):

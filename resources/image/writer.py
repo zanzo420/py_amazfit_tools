@@ -17,6 +17,8 @@ class Writer:
         self._bitsPerPixel = 32
         self._unknown1 = 24
         self._unknown2 = 1
+        if self._width == 206 and self._height == 640:
+            self._bitsPerPixel = 16
 
         import math
         self._rowLengthInBytes = math.ceil(self._width * self._bitsPerPixel / 8)
@@ -24,7 +26,11 @@ class Writer:
         self._writer.write(Writer.signature)
 
         self.writeHeader()
-        self.writeImage()
+        if self._width == 206 and self._height == 640:
+            self.writeImage16()
+        else:
+            self.writeImage()
+        #self.writeImage()
 
 
     def writeHeader(self):
@@ -51,3 +57,18 @@ class Writer:
             self._writer.write(g.to_bytes(1, byteorder='little'))
             self._writer.write(r.to_bytes(1, byteorder='little'))
             self._writer.write(a.to_bytes(1, byteorder='little'))
+
+    def writeImage16(self):
+        logging.debug("Writing image...")
+
+        pixels = self._image.convert('RGBA')
+        data = pixels.getdata()
+
+        for pixel in data:
+            (r, g, b, a) = pixel
+            b = 0
+            g = 0
+            #firstByte = rowBytes[x * self._step]
+            #secondByte = rowBytes[x * self._step + 1]
+            self._writer.write(b.to_bytes(1, byteorder='little'))
+            self._writer.write(g.to_bytes(1, byteorder='little'))

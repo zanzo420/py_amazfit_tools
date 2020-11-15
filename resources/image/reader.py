@@ -25,7 +25,10 @@ class Reader():
             assert(False) # not implemented
         else:
             self.readHeader()
-            return self.readImage()
+            if self._bitsPerPixel == 32:
+                return self.readImage()
+            else:
+                return self.readImage16()
 
 
     def readImage(self):
@@ -40,6 +43,21 @@ class Reader():
                     alpha = rowBytes[x * self._step + 3]
                 else:
                     alpha = 255
+                color = resources.image.color.Color.fromArgb(alpha, r, g, b)
+                image.putpixel((x,y), color)
+        return image
+    
+    def readImage16(self):
+        image = Image.new('RGBA', (self._width, self._height))
+        for y in range(self._height):
+            rowBytes = self._reader.read(self._rowLengthInBytes)
+            for x in range(self._width):
+                firstByte = rowBytes[x * self._step];
+                secondByte = rowBytes[x * self._step + 1];
+                r = ((secondByte >> 3) & 0x1f) << 3;
+                g = (((firstByte >> 5) & 0x7) | ((secondByte & 0x07) << 3)) << 2;
+                b = (firstByte & 0x1f) << 3;
+                alpha = 255
                 color = resources.image.color.Color.fromArgb(alpha, r, g, b)
                 image.putpixel((x,y), color)
         return image
