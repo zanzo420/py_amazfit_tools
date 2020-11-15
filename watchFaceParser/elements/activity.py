@@ -24,6 +24,7 @@ class Activity:
         15: { 'Name': 'CaloriesTextualIcon', 'Type': 'long'}, # gts - Classic number_101759
         17: { 'Name': 'CaloriesGraph', 'Type': CaloriesContainer}, # gts circle.bin
         18: { 'Name': 'PulseGraph', 'Type': PulseContainer}, # gts fluorescence
-        19: { 'Name': 'Unknown15', 'Type': Number}, 
-        21: { 'Name': 'PAI', 'Type': Number}, 
+        19: { 'Name': 'Stand', 'Type': Number}, # gts Stand
+        20: { 'Name': 'Goals', 'Type': Number}, # gts Goals
+        21: { 'Name': 'PAI', 'Type': Number}, # gts PAI
     }
